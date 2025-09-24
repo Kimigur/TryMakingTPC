@@ -1,0 +1,24 @@
+
+env = SConscript('godot-cpp/SConstruct')
+
+
+env.Append(CPPPATH="src/")
+
+trymakingtpc = Glob("src/*.cpp")
+
+
+if env['platform'] == 'linux':
+    trymakingtpclibpath = '../addons/TryMakingTPC{}{}'.format(env['suffix'], env['SHLIBSUFFIX'])
+
+    env.Append(CXXFLAGS=["-fPIC", "-Wall", "-std=c++17", "-fvisibility=default"])
+    env.Append(LINKFLAGS=["-shared"])
+
+    trymakingtpcsharedlib = env.SharedLibrary(trymakingtpclibpath,trymakingtpc)
+    Default(trymakingtpcsharedlib)
+elif env['platform'] == 'windows':
+    trymakingtpclibpath = '../addons/TryMakingTPC{}{}'.format(env['suffix'], env['SHLIBSUFFIX'])  # SHLIBSUFFIX обычно .dll
+
+    env.Append(CXXFLAGS=["/EHsc", "/MD", "/std:c++17"])  # MSVC
+
+    trymakingtpcsharedlib = env.SharedLibrary(trymakingtpclibpath, trymakingtpc)
+    Default(trymakingtpcsharedlib)

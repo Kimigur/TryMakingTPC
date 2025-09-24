@@ -1,0 +1,12 @@
+.sconsign.dblite
+
+# IDE
+TryMakingTPC.cflags*
+TryMakingTPC.cxxflags*
+TryMakingTPC.user*
+TryMakingTPC.config*
+TryMakingTPC.files*
+TryMakingTPC.creator*
+TryMakingTPC.includes*
+
+.qtc_clangd/

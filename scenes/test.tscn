@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddvh07no8y6dg"]
+
+[ext_resource type="Texture2D" uid="uid://dm2m3tdtitwgy" path="res://icon.svg" id="1_errlg"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Test" type="Test" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8815994, 0.4675486, 1.8815994)
+
+[node name="Test2" type="Test2" parent="Test"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9578817, -0.29213881, -1.9578817)
+
+[node name="Sprite3D" type="Sprite3D" parent="Test/Test2"]
+texture = ExtResource("1_errlg")
