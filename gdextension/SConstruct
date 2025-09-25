@@ -18,7 +18,5 @@ if env['platform'] == 'linux':
 elif env['platform'] == 'windows':
     trymakingtpclibpath = '../addons/TryMakingTPC{}{}'.format(env['suffix'], env['SHLIBSUFFIX'])  # SHLIBSUFFIX обычно .dll
 
-    env.Append(CXXFLAGS=["/EHsc", "/MD", "/std:c++17"])  # MSVC
-
     trymakingtpcsharedlib = env.SharedLibrary(trymakingtpclibpath, trymakingtpc)
     Default(trymakingtpcsharedlib)
