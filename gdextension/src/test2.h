@@ -11,8 +11,8 @@ public:
 	Test2();
 
 public:
-	void _ready();
-	void _physics_process(double p_delta);
+    void _ready() override;
+    void _physics_process(double p_delta) override;
 
 protected:
 	static void _bind_methods();
