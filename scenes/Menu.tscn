@@ -1,127 +1,156 @@
-[gd_scene load_steps=3 format=3 uid="uid://doft6t5cfxy7j"]
+[gd_scene load_steps=23 format=3 uid="uid://doft6t5cfxy7j"]
 
-[ext_resource type="FontFile" uid="uid://d3uqebxmv4kkb" path="res://assets/pixelcyr_normal.ttf" id="1_xdvgc"]
+[ext_resource type="Texture2D" uid="uid://b6l8xpd5bmcei" path="res://assets/menu.png" id="1_upctu"]
+[ext_resource type="Texture2D" uid="uid://yrjtcbpf6qku" path="res://assets/TryMakingTPK.png" id="2_1abgu"]
+[ext_resource type="Texture2D" uid="uid://cffq0ky2hb45r" path="res://assets/Банка.png" id="2_11y2r"]
+[ext_resource type="FontFile" uid="uid://d3uqebxmv4kkb" path="res://assets/pixelcyr_normal.ttf" id="2_upctu"]
+[ext_resource type="Texture2D" uid="uid://brd3swiq5f7iq" path="res://assets/БанкаPressed.png" id="3_jmdev"]
+[ext_resource type="Texture2D" uid="uid://cfo4hpopbdysh" path="res://assets/Coffe.png" id="5_yt8fu"]
+[ext_resource type="Texture2D" uid="uid://doux6gjhurknr" path="res://assets/CoffePressed.png" id="6_4umqm"]
+[ext_resource type="Texture2D" uid="uid://bjdlk6nldc762" path="res://assets/CoffeHovet.png" id="7_pp5m5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_lumdm"]
-font_size = 40
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0tnf"]
+texture = ExtResource("2_11y2r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jmdev"]
+texture = ExtResource("3_jmdev")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o0tnf"]
+load_path = "res://.godot/imported/БанкаHovet.png-ae46ac1e72ea8e330797126719ff0c12.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b6cxs"]
+texture = SubResource("CompressedTexture2D_o0tnf")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4umqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pp5m5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_el213"]
+texture = ExtResource("5_yt8fu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thu7x"]
+texture = ExtResource("6_4umqm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2af52"]
+texture = ExtResource("7_pp5m5")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_upctu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_11y2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o0tnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jmdev"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b6cxs"]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 480.0
+[node name="BGMenu" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(240, 135)
+texture = ExtResource("1_upctu")
+
+[node name="BGMenu2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(249, 135)
+scale = Vector2(1, 0.96)
+texture = ExtResource("2_1abgu")
+
+[node name="Banka" type="Button" parent="."]
+texture_filter = 1
+offset_left = 17.0
+offset_top = 203.0
+offset_right = 97.0
+offset_bottom = 271.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_o0tnf")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jmdev")
+theme_override_styles/hover = SubResource("StyleBoxTexture_b6cxs")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4umqm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp5m5")
+
+[node name="Coffe" type="Button" parent="."]
+texture_filter = 1
+offset_left = 373.0
+offset_top = 202.0
+offset_right = 453.0
 offset_bottom = 270.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_el213")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_thu7x")
+theme_override_styles/hover = SubResource("StyleBoxTexture_2af52")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_4umqm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp5m5")
 
-[node name="Control" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="ButtonExit" type="Button" parent="."]
+offset_left = 241.00002
+offset_top = 202.0
+offset_right = 315.0
+offset_bottom = 212.0
+rotation = 0.039695013
+scale = Vector2(1.0314627, 1.026126)
+theme_override_colors/font_color = Color(0.93, 0, 0.015499763, 1)
+theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
+text = "Выход
+"
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-text = "Меню"
-label_settings = SubResource("LabelSettings_lumdm")
-horizontal_alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 113.0
+offset_top = 126.000015
+offset_right = 187.0
+offset_bottom = 194.5477
+rotation = -0.1477575
+scale = Vector2(0.8246119, 0.910044)
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ButtonContinue" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-theme_override_font_sizes/font_size = 10
-disabled = true
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.61960787, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
 text = "Продолжить игру"
 
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer2"]
+[node name="ButtonNewGame" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-theme_override_font_sizes/font_size = 10
-text = "Начать игру"
-
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-theme_override_font_sizes/font_size = 10
-text = "Настройки"
-
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-theme_override_font_sizes/font_size = 10
-text = "Титры"
-
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
-theme_override_font_sizes/font_size = 10
-text = "Выход"
-
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer5"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Control2" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="LinkButton" type="LinkButton" parent="VBoxContainer/HBoxContainer6"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("1_xdvgc")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
 theme_override_font_sizes/font_size = 8
-text = "Поддержи нас"
-uri = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
+text = "Новая игра"
 
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer6"]
+[node name="ButtonSetings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
+text = "Настройки"
