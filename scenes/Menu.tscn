@@ -110,7 +110,7 @@ offset_bottom = 194.5477
 rotation = -0.1477575
 scale = Vector2(0.8246119, 0.910044)
 
-[node name="ButtonContinue" type="Button" parent="VBoxContainer"]
+[node name="ButtonStart" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0.61960787, 0, 0, 1)
@@ -123,22 +123,8 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
-text = "Продолжить игру"
-
-[node name="ButtonNewGame" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
-theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
-theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
-theme_override_fonts/font = ExtResource("2_upctu")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
-text = "Новая игра"
+text = "Начать
+"
 
 [node name="ButtonSetings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -154,3 +140,35 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
 text = "Настройки"
+
+[node name="ButtonNewGame" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
+text = "Новая игра"
+
+[node name="ButtonNewGame2" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6189331, 8.061901e-07, 2.4065375e-07, 1)
+theme_override_colors/font_pressed_color = Color(0.9900457, 0, 0.0026206232, 1)
+theme_override_colors/font_hover_color = Color(0.63222563, 6.3773246e-07, 2.4065375e-07, 1)
+theme_override_fonts/font = ExtResource("2_upctu")
+theme_override_font_sizes/font_size = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_upctu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_11y2r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o0tnf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
+text = "Новая игра"
