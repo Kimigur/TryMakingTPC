@@ -177,3 +177,4 @@ text = "Новая игра"
 
 [connection signal="mouse_entered" from="ButtonExit" to="ButtonExit" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ButtonExit" to="ButtonExit" method="_on_mouse_exited"]
+[connection signal="pressed" from="ButtonExit" to="ButtonExit" method="_on_pressed"]
