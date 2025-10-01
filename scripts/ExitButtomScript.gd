@@ -4,7 +4,10 @@ extends Button
 var this = $"."
 
 func _on_mouse_entered() -> void:
-	this.text = "Alt + F4"
+	if(randi()%20 == 0):
+		this.text = "Боря иди на..."
+	else:
+		this.text = "Alt + F4"
 
 func _on_mouse_exited() -> void:
 	this.text =  "Выход"
