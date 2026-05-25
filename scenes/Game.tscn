@@ -1,0 +1,87 @@
+[gd_scene load_steps=20 format=3 uid="uid://dkxnpgl5slkck"]
+
+[ext_resource type="Texture2D" uid="uid://c13dnw30h7g4y" path="res://assets/ИгровоеМеню.png" id="1_ibkli"]
+[ext_resource type="Texture2D" uid="uid://bub71pdqiv6d5" path="res://assets/ИгроваяКнопка1.png" id="2_kiw3p"]
+[ext_resource type="Texture2D" uid="uid://ch72pdodwl8rm" path="res://assets/ИгроваяКнопка1hold.png" id="3_400sg"]
+[ext_resource type="Texture2D" uid="uid://b6wgwkuc8h5nm" path="res://assets/ИгроваяКнопка3.png" id="4_g4kob"]
+[ext_resource type="Texture2D" uid="uid://bfo211li6sw8l" path="res://assets/ИгроваяКнопка3hold.png" id="5_qy1jj"]
+[ext_resource type="Texture2D" uid="uid://dfa7dawey5kkd" path="res://assets/ИгроваяКнопка2.png" id="6_3xj3m"]
+[ext_resource type="Script" uid="uid://bfs8fbnye8pgb" path="res://scripts/ExitToMenu.gd" id="6_400sg"]
+[ext_resource type="Texture2D" uid="uid://ds4nareub2sor" path="res://assets/ИгроваяКнопка2hold.png" id="7_mcffj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2rd6h"]
+texture = ExtResource("2_kiw3p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ua8r"]
+texture = ExtResource("2_kiw3p")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r7sob"]
+texture = ExtResource("3_400sg")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y5y3l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vjgi4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kyk2p"]
+texture = ExtResource("4_g4kob")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_45i86"]
+texture = ExtResource("4_g4kob")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sv1m6"]
+texture = ExtResource("5_qy1jj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8wo8"]
+texture = ExtResource("6_3xj3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_attvq"]
+texture = ExtResource("6_3xj3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bneo8"]
+texture = ExtResource("7_mcffj")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BGMenu" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(240, 135)
+texture = ExtResource("1_ibkli")
+
+[node name="ButtonPause" type="Button" parent="."]
+texture_filter = 1
+offset_left = 416.0476
+offset_top = 208.0
+offset_right = 441.0
+offset_bottom = 230.86365
+theme_override_styles/normal = SubResource("StyleBoxTexture_2rd6h")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7ua8r")
+theme_override_styles/hover = SubResource("StyleBoxTexture_r7sob")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_y5y3l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vjgi4")
+
+[node name="ButtonExit" type="Button" parent="."]
+texture_filter = 1
+offset_left = 447.0
+offset_top = 208.0
+offset_right = 471.09525
+offset_bottom = 231.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_kyk2p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_45i86")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sv1m6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_y5y3l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vjgi4")
+script = ExtResource("6_400sg")
+
+[node name="ButtonSetings" type="Button" parent="."]
+texture_filter = 1
+offset_left = 435.0
+offset_top = 211.0
+offset_right = 455.0
+offset_bottom = 226.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_a8wo8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_attvq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bneo8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_y5y3l")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vjgi4")
+
+[connection signal="pressed" from="ButtonExit" to="ButtonExit" method="_on_pressed"]

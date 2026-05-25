@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://doft6t5cfxy7j"]
+[gd_scene load_steps=25 format=3 uid="uid://doft6t5cfxy7j"]
 
 [ext_resource type="Texture2D" uid="uid://b6l8xpd5bmcei" path="res://assets/menu.png" id="1_upctu"]
 [ext_resource type="Texture2D" uid="uid://yrjtcbpf6qku" path="res://assets/TryMakingTPK.png" id="2_1abgu"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://doux6gjhurknr" path="res://assets/CoffePressed.png" id="6_4umqm"]
 [ext_resource type="Texture2D" uid="uid://bjdlk6nldc762" path="res://assets/CoffeHovet.png" id="7_pp5m5"]
 [ext_resource type="Script" uid="uid://bgxr0g10y68od" path="res://scripts/ExitButtomScript.gd" id="9_yt8fu"]
+[ext_resource type="Script" uid="uid://clrpbwof0gavq" path="res://scripts/button_start.gd" id="10_4umqm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o0tnf"]
 texture = ExtResource("2_11y2r")
@@ -127,6 +128,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_jmdev")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b6cxs")
 text = "Начать
 "
+script = ExtResource("10_4umqm")
 
 [node name="ButtonSetings" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -178,3 +180,4 @@ text = "Новая игра"
 [connection signal="mouse_entered" from="ButtonExit" to="ButtonExit" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ButtonExit" to="ButtonExit" method="_on_mouse_exited"]
 [connection signal="pressed" from="ButtonExit" to="ButtonExit" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonStart" to="VBoxContainer/ButtonStart" method="_on_pressed"]

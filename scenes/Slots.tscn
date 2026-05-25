@@ -1,0 +1,96 @@
+[gd_scene load_steps=21 format=3 uid="uid://dx7oew1jh2psa"]
+
+[ext_resource type="Texture2D" uid="uid://dhkbojrwj4unc" path="res://assets/МенюСлоты.png" id="1_0ugm4"]
+[ext_resource type="Texture2D" uid="uid://utxg4dre00cp" path="res://assets/Слот1.png" id="2_h45ou"]
+[ext_resource type="Texture2D" uid="uid://b4sd8f68w6n6f" path="res://assets/Слот1hold.png" id="3_5t8fq"]
+[ext_resource type="Texture2D" uid="uid://dcij7n4rrpms1" path="res://assets/Слот3.png" id="3_kekyb"]
+[ext_resource type="Script" uid="uid://bkr2p3po0efjw" path="res://scripts/slot.gd" id="4_42n1v"]
+[ext_resource type="Texture2D" uid="uid://v56sff01440q" path="res://assets/Слот3hold.png" id="4_aqiym"]
+[ext_resource type="Texture2D" uid="uid://b7833sr2tvnj3" path="res://assets/Слот2.png" id="5_42n1v"]
+[ext_resource type="Texture2D" uid="uid://bhpmdrtyox3n6" path="res://assets/Слот2hold.png" id="6_mgybu"]
+
+[sub_resource type="GDScript" id="GDScript_0ugm4"]
+script/source = "extends Node2D
+"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hnc52"]
+texture = ExtResource("2_h45ou")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_42n1v"]
+texture = ExtResource("2_h45ou")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mgybu"]
+texture = ExtResource("3_5t8fq")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42n1v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mgybu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x2jhv"]
+texture = ExtResource("5_42n1v")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y5obn"]
+texture = ExtResource("5_42n1v")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jf6o8"]
+texture = ExtResource("6_mgybu")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_img5n"]
+texture = ExtResource("3_kekyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kekyb"]
+texture = ExtResource("3_kekyb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aqiym"]
+texture = ExtResource("4_aqiym")
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_0ugm4")
+
+[node name="BGMenu" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(240, 135)
+texture = ExtResource("1_0ugm4")
+
+[node name="Slot1" type="Button" parent="."]
+texture_filter = 1
+offset_left = 7.0
+offset_top = 113.0
+offset_right = 60.0
+offset_bottom = 264.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_hnc52")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_42n1v")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mgybu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_42n1v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mgybu")
+script = ExtResource("4_42n1v")
+
+[node name="Slot2" type="Button" parent="."]
+texture_filter = 1
+offset_left = 49.0
+offset_top = 114.0
+offset_right = 102.0
+offset_bottom = 265.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_x2jhv")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y5obn")
+theme_override_styles/hover = SubResource("StyleBoxTexture_jf6o8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_42n1v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mgybu")
+script = ExtResource("4_42n1v")
+
+[node name="Slot3" type="Button" parent="."]
+texture_filter = 1
+offset_left = 92.0
+offset_top = 112.0
+offset_right = 145.0
+offset_bottom = 263.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_img5n")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kekyb")
+theme_override_styles/hover = SubResource("StyleBoxTexture_aqiym")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_42n1v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mgybu")
+script = ExtResource("4_42n1v")
+
+[connection signal="pressed" from="Slot1" to="Slot1" method="_on_pressed"]
+[connection signal="pressed" from="Slot2" to="Slot2" method="_on_pressed"]
+[connection signal="pressed" from="Slot3" to="Slot3" method="_on_pressed"]
