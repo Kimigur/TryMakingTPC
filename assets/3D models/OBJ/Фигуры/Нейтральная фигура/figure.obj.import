@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dnjvrlrlwqm00"
+path="res://.godot/imported/figure.obj-58da4900b55a26c7fa715f9c8c8a87b7.mesh"
+
+[deps]
+
+files=["res://.godot/imported/figure.obj-58da4900b55a26c7fa715f9c8c8a87b7.mesh"]
+
+source_file="res://assets/3D models/OBJ/Фигуры/Нейтральная фигура/figure.obj"
+dest_files=["res://.godot/imported/figure.obj-58da4900b55a26c7fa715f9c8c8a87b7.mesh", "res://.godot/imported/figure.obj-58da4900b55a26c7fa715f9c8c8a87b7.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

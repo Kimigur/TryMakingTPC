@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0cbh56ftrwpu"]
+
+[ext_resource type="ArrayMesh" uid="uid://dhh6hmsiuqvwg" path="res://assets/3D models/OBJ/новый стол/true table.obj" id="1_llaio"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="TrueTable" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_llaio")
