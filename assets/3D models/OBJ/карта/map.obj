@@ -1,6 +1,6 @@
 # Blender 5.2.0 LTS
 # www.blender.org
-mtllib карта.mtl
+mtllib map.mtl
 o карта
 v -0.500000 0.000000 -0.500000
 v 0.000000 0.000000 -0.500000
