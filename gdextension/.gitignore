@@ -8,5 +8,6 @@ TryMakingTPC.config*
 TryMakingTPC.files*
 TryMakingTPC.creator*
 TryMakingTPC.includes*
+compile_commands.json*
 
 .qtc_clangd/
