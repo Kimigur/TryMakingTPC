@@ -1,10 +1,23 @@
+import os
+
 
 env = SConscript('godot-cpp/SConstruct')
 
 
-env.Append(CPPPATH="src/")
+#env.Append(CPPPATH="src/")
 
-trymakingtpc = Glob("src/*.cpp")
+include_paths = ["src/"]
+for root, dirs, files in os.walk("src"):
+    for d in dirs:
+        include_paths.append(os.path.join(root, d))
+
+env.Append(CPPPATH=include_paths)
+
+trymakingtpc = []
+for root, dirs, files in os.walk("src"):
+    for file in files:
+        if file.endswith(".cpp"):
+            trymakingtpc.append(os.path.join(root, file))
 
 
 if env['platform'] == 'linux':

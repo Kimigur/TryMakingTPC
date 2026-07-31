@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="TryMakingTPK"
-run/main_scene="uid://doft6t5cfxy7j"
+run/main_scene="uid://d0cbh56ftrwpu"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

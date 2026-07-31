@@ -1,8 +1,54 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0cbh56ftrwpu"]
+[gd_scene load_steps=6 format=3 uid="uid://d0cbh56ftrwpu"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhh6hmsiuqvwg" path="res://assets/3D models/OBJ/новый стол/true table.obj" id="1_llaio"]
+[ext_resource type="ArrayMesh" uid="uid://r1yjgprmd02r" path="res://assets/3D models/OBJ/стул/chair.obj" id="2_yd8kv"]
+[ext_resource type="ArrayMesh" uid="uid://co3blwkhlhekm" path="res://assets/3D models/OBJ/карта/map.obj" id="3_uaf1y"]
+[ext_resource type="Script" uid="uid://clbk04daxscrr" path="res://scenes/game/map.gd" id="4_iba00"]
+[ext_resource type="ArrayMesh" uid="uid://dpgm1cyq007fk" path="res://assets/3D models/OBJ/Ширма/screen.obj" id="4_uaf1y"]
 
 [node name="Node3D" type="Node3D"]
 
+[node name="Core" type="Core" parent="."]
+
 [node name="TrueTable" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.5801926, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("1_llaio")
+
+[node name="Chair" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.82581204, 0, 0.19599324)
+mesh = ExtResource("2_yd8kv")
+
+[node name="Chair2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.826, 0, -0.75457954)
+mesh = ExtResource("2_yd8kv")
+skeleton = NodePath("../Chair")
+
+[node name="Chair3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.45969322, 0, -0.56579375, 0, 0.7289997, 0, 0.56579375, 0, -0.45969322, -0.3184514, 2.384185e-07, 1.8420048)
+mesh = ExtResource("2_yd8kv")
+skeleton = NodePath("../Chair2")
+
+[node name="Chair4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.9, 0, -1.3589622e-07, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.844, 0, 0.196)
+mesh = ExtResource("2_yd8kv")
+skeleton = NodePath("../Chair")
+
+[node name="Chair5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.9, 0, -1.3589622e-07, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.844, 0, -0.755)
+mesh = ExtResource("2_yd8kv")
+skeleton = NodePath(".")
+
+[node name="Map" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.1932657, 0, 0, 0, 1, 0, 0, 0, 1.1932657, 0.013952747, 1.2272178, -0.25938857)
+mesh = ExtResource("3_uaf1y")
+script = ExtResource("4_iba00")
+
+[node name="Screen" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.5, 0, -2.1855695e-07, 0, 2.5, 0, 2.1855695e-07, 0, -2.5, 0, 1.519, 0.884)
+mesh = ExtResource("4_uaf1y")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, -0.004490018, 1.9665487, 0.15479018)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8735242, 0)

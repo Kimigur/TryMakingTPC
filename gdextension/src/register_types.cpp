@@ -10,6 +10,10 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/godot.hpp>
+#include "core.h"
+#include "module/board.h"
+#include "template/unit.h"
+#include "template/cell.h"
 #include "test2.h"
 #include "test.h"
 
@@ -19,8 +23,14 @@ void initialize_trymakingtpc_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+    ClassDB::register_class<Core>();
+    ClassDB::register_class<Board>();
+    ClassDB::register_class<Cell>();
+    ClassDB::register_class<Unit>();
+
+
 	ClassDB::register_class<Test>();
-	ClassDB::register_class<Test2>();
+    ClassDB::register_class<Test2>();
 }
 
 void uninitialize_trymakingtpc_module(ModuleInitializationLevel p_level) {
