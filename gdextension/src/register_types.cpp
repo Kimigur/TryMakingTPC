@@ -12,6 +12,7 @@
 #include <godot_cpp/godot.hpp>
 #include "core.h"
 #include "module/board.h"
+#include "module/bus.h"
 #include "template/unit.h"
 #include "template/cell.h"
 #include "test2.h"
@@ -25,6 +26,8 @@ void initialize_trymakingtpc_module(ModuleInitializationLevel p_level) {
 	}
     ClassDB::register_class<Core>();
     ClassDB::register_class<Board>();
+    ClassDB::register_class<Bus>();
+
     ClassDB::register_class<Cell>();
     ClassDB::register_class<Unit>();
 

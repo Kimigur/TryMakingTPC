@@ -15,12 +15,15 @@ public:
     Board();
 
     Ref<Cell> get_cell(int x, int y) const;
+    Ref<Cell> get_cell(Vector2i pos) const;
     void set_cell(int x, int y, const Ref<Cell>& cell);
 
     Ref<Unit> get_unit(int x, int y) const;
+    Ref<Unit> get_unit(Vector2i pos) const;
     void set_unit(int x, int y, const Ref<Unit>& unit);
 
     Array get_reachable_cells(Vector2i from);
+    Array get_path(Vector2i from, Vector2i to);
     bool move_unit(Vector2i from, Vector2i to);
 
     bool is_valid_coord(int x, int y);

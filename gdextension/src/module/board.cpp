@@ -18,6 +18,11 @@ Ref<Cell> Board::get_cell(int x, int y) const
     return cells[x][y];
 }
 
+Ref<Cell> Board::get_cell(Vector2i pos) const
+{
+    return cells[pos.x][pos.y];
+}
+
 void Board::set_cell(int x, int y, const Ref<Cell> &cell)
 {
     cells[x][y] = cell;
@@ -28,18 +33,20 @@ Ref<Unit> Board::get_unit(int x, int y) const
     return units[x][y];
 }
 
+Ref<Unit> Board::get_unit(Vector2i pos) const
+{
+    return units[pos.x][pos.y];
+}
+
 void Board::set_unit(int x, int y, const Ref<Unit> &unit)
 {
     units[x][y] = unit;
+    unit->set_position(Vector2i(x,y));
 }
 
 Array Board::get_reachable_cells(Vector2i from)
 {
     Array result;
-
-    if (!is_valid_coord(from.x, from.y) || units[from.x][from.y] == nullptr) {
-        return result;
-    }
 
     Ref<Unit> unit = get_unit(from.x, from.y);
     int max_dist = unit->get_current_speed();
@@ -62,13 +69,12 @@ Array Board::get_reachable_cells(Vector2i from)
 
         if (d >= max_dist) continue;
 
-        for (int i = 0; i < 8; ++i) { // ← Изменено с 4 на 8
+        for (int i = 0; i < 8; ++i) {
             int nx = curr.x + dx[i];
             int ny = curr.y + dy[i];
 
             if (!is_valid_coord(nx, ny)) continue;
 
-            // Не проходим сквозь занятые клетки (кроме стартовой)
             if (units[nx][ny] != nullptr && !(nx == from.x && ny == from.y)) continue;
 
             if (dist[nx][ny] == -1) {
@@ -82,11 +88,78 @@ Array Board::get_reachable_cells(Vector2i from)
     return result;
 }
 
+Array Board::get_path(Vector2i from, Vector2i to)
+{
+    Array path;
+
+    // if (!is_valid_coord(from.x, from.y) || !is_valid_coord(to.x, to.y)) return path;
+    // if (units[from.x][from.y] == nullptr) return path;
+
+    Ref<Unit> unit = get_unit(from.x, from.y);
+    int max_dist = unit->get_current_speed();
+    if (max_dist <= 0) return path;
+
+    std::vector<std::vector<Vector2i>> parent(WIDTH, std::vector<Vector2i>(HEIGHT, Vector2i(-1, -1)));
+    std::vector<std::vector<int>> dist(WIDTH, std::vector<int>(HEIGHT, -1));
+    std::queue<Vector2i> q;
+
+    q.push(from);
+    dist[from.x][from.y] = 0;
+
+    const int dx[] = { 1, -1,  0,  0,  1,  1, -1, -1 };
+    const int dy[] = { 0,  0,  1, -1,  1, -1,  1, -1 };
+
+    bool reached = false;
+
+    while (!q.empty()) {
+        Vector2i curr = q.front();
+        q.pop();
+
+        if (curr == to) {
+            reached = true;
+            break;
+        }
+
+        int d = dist[curr.x][curr.y];
+        if (d >= max_dist) continue;
+
+        for (int i = 0; i < 8; ++i) {
+            int nx = curr.x + dx[i];
+            int ny = curr.y + dy[i];
+
+            if (!is_valid_coord(nx, ny)) continue;
+            if (units[nx][ny] != nullptr && !(nx == from.x && ny == from.y)) continue;
+
+            if (dist[nx][ny] == -1) {
+                dist[nx][ny] = d + 1;
+                parent[nx][ny] = curr;
+                q.push(Vector2i(nx, ny));
+            }
+        }
+    }
+
+    if (!reached) return path;
+
+    Vector2i curr = to;
+    while (curr != from) {
+        path.push_back(curr);
+        curr = parent[curr.x][curr.y];
+    }
+
+    path.reverse();
+
+    return path;
+}
+
 bool Board::move_unit(Vector2i from, Vector2i to)
 {
-    if (!is_valid_coord(from.x, from.y) || !is_valid_coord(to.x, to.y)) return false;
+    if (!is_valid_coord(from.x, from.y) || !is_valid_coord(to.x, to.y)) {
+        return false;
+    }
 
-    if (units[from.x][from.y] == nullptr || units[to.x][to.y] != nullptr) return false;
+    if (get_unit(from.x, from.y) == nullptr || get_unit(to.x, to.y) != nullptr) {
+        return false;
+    }
 
     Ref<Unit> unit = get_unit(from.x, from.y);
     int current_speed = unit->get_current_speed();
@@ -127,6 +200,8 @@ bool Board::move_unit(Vector2i from, Vector2i to)
     units[to.x][to.y] = units[from.x][from.y];
     units[from.x][from.y] = Ref<Unit>();
 
+    units[to.x][to.y]->set_position(Vector2i(to.x, to.y));
+
     unit->set_current_speed(current_speed - path_cost);
 
     return true;
@@ -144,10 +219,26 @@ Vector2 Board::get_board_size()
 
 void Board::_bind_methods()
 {
-    ClassDB::bind_method(D_METHOD("get_cell", "x", "y"), &Board::get_cell);
+    ClassDB::bind_method(
+        D_METHOD("get_cell", "x", "y"),
+        static_cast<Ref<Cell> (Board::*)(int, int) const>(&Board::get_cell)
+        );
+
+    ClassDB::bind_method(
+        D_METHOD("get_cellv", "pos"),
+        static_cast<Ref<Cell> (Board::*)(Vector2i) const>(&Board::get_cell)
+        );
     ClassDB::bind_method(D_METHOD("set_cell", "x", "y", "cell"), &Board::set_cell);
 
-    ClassDB::bind_method(D_METHOD("get_unit", "x", "y"), &Board::get_unit);
+    ClassDB::bind_method(
+        D_METHOD("get_unit", "x", "y"),
+        static_cast<Ref<Unit> (Board::*)(int, int) const>(&Board::get_unit)
+        );
+
+    ClassDB::bind_method(
+        D_METHOD("get_unitv", "pos"),
+        static_cast<Ref<Unit> (Board::*)(Vector2i) const>(&Board::get_unit)
+        );
     ClassDB::bind_method(D_METHOD("set_unit", "x", "y", "unit"), &Board::set_unit);
 
     ClassDB::bind_method(D_METHOD("get_reachable_cells", "from"), &Board::get_reachable_cells);
