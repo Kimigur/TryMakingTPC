@@ -14,7 +14,14 @@ func ready():
 	pass
 
 func execute():
-	var movecarr = get_board().get_reachable_cells(position)
-	if movecarr.size() > 0:
+	if main_hand_slot != null:
+		var actions = main_hand_slot.get_actions()
+		if !actions.is_empty():
+			var arr = actions[0].get_valid_targets(self, get_board())
+			if !arr.is_empty():
+				actions[0].execute(self,get_board(),arr[0])
+	else:
+		var movecarr = get_board().get_reachable_cells(get_position())
+		if movecarr.size() > 0:
 			var movec = movecarr[randi() % movecarr.size()]
-			get_board().move_unit(position, movec)
+			get_board().move_unit(get_position(), movec)

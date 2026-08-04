@@ -29,6 +29,8 @@ public:
     bool is_valid_coord(int x, int y);
 
     Vector2 get_board_size();
+    Array get_units_arrey() const;
+    Array get_cells_arrey() const;
 
 protected:
     static void _bind_methods();

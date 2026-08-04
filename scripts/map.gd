@@ -17,10 +17,13 @@ func test():
 	var e = Enemy.new()
 	var p = player.new()
 	var t1 = tree.new()
+	var sword = RustySword.new()
 	
 	core_node.get_board().set_unit(3, 4, e)
 	core_node.get_board().set_unit(13, 8, p)
 	core_node.get_board().set_unit(5, 5, t1)
+	
+	e.main_hand_slot = sword
 	
 	core_node.start_combat()
 

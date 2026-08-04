@@ -217,6 +217,32 @@ Vector2 Board::get_board_size()
     return Vector2(WIDTH, HEIGHT);
 }
 
+Array Board::get_cells_arrey() const
+{
+    Array ret;
+    for (int x = 0; x < WIDTH; ++x) {
+        Array w;
+        for (int y = 0; y < HEIGHT; ++y) {
+            w.push_back(get_cell(x,y));
+        }
+        ret.append_array(w);
+    }
+    return ret;
+}
+
+Array Board::get_units_arrey() const
+{
+    Array ret;
+    for (int x = 0; x < WIDTH; ++x) {
+        Array w;
+        for (int y = 0; y < HEIGHT; ++y) {
+            w.push_back(get_unit(x,y));
+        }
+        ret.append_array(w);
+    }
+    return ret;
+}
+
 void Board::_bind_methods()
 {
     ClassDB::bind_method(
@@ -229,6 +255,8 @@ void Board::_bind_methods()
         static_cast<Ref<Cell> (Board::*)(Vector2i) const>(&Board::get_cell)
         );
     ClassDB::bind_method(D_METHOD("set_cell", "x", "y", "cell"), &Board::set_cell);
+    ClassDB::bind_method(D_METHOD("get_cells_arrey"), &Board::get_cells_arrey);
+    ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "cells"), "", "get_cells_arrey");
 
     ClassDB::bind_method(
         D_METHOD("get_unit", "x", "y"),
@@ -240,9 +268,13 @@ void Board::_bind_methods()
         static_cast<Ref<Unit> (Board::*)(Vector2i) const>(&Board::get_unit)
         );
     ClassDB::bind_method(D_METHOD("set_unit", "x", "y", "unit"), &Board::set_unit);
+    ClassDB::bind_method(D_METHOD("get_units_arrey"), &Board::get_units_arrey);
+    ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "units"), "", "get_units_arrey");
 
     ClassDB::bind_method(D_METHOD("get_reachable_cells", "from"), &Board::get_reachable_cells);
     ClassDB::bind_method(D_METHOD("move_unit", "from", "to"), &Board::move_unit);
 
+    ClassDB::bind_method(D_METHOD("is_valid_coord", "x", "y"), &Board::is_valid_coord);
     ClassDB::bind_method(D_METHOD("get_board_size"), &Board::get_board_size);
+    ADD_PROPERTY(PropertyInfo(Variant::VECTOR2I, "board_size"), "", "get_board_size");
 }

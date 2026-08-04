@@ -56,7 +56,7 @@ void Core::start_combat()
 {
     turn_queue.clear();
     round_number = 1;
-    current_turn_index = 0;
+    current_turn_index = -1;
     in_combat = true;
 
     std::vector<TurnEntry> active_units;
@@ -185,7 +185,9 @@ void Core::_bind_methods()
 {
     ClassDB::bind_method(D_METHOD("_ready_cpp"), &Core::_ready);
     ClassDB::bind_method(D_METHOD("get_board"), &Core::get_board);
+    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "board"), "", "get_board");
     ClassDB::bind_method(D_METHOD("get_event_bus"), &Core::get_event_bus);
+    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "event_bus"), "", "get_event_bus");
 
     ClassDB::bind_method(D_METHOD("get_reachable_cells", "from"), &Core::get_reachable_cells);
     ClassDB::bind_method(D_METHOD("get_path", "from", "to"), &Core::get_path);
