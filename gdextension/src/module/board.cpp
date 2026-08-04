@@ -13,6 +13,11 @@ Board::Board() {
     }
 }
 
+Board::~Board()
+{
+
+}
+
 Ref<Cell> Board::get_cell(int x, int y) const
 {
     return cells[x][y];

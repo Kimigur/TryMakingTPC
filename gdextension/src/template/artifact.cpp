@@ -3,9 +3,7 @@
 
 using namespace godot;
 
-Artifact::Artifact() {
-    unit = nullptr;
-}
+Artifact::Artifact() {}
 
 void Artifact::ready()
 {
@@ -49,12 +47,12 @@ String Artifact::get_artifact_slot_type()
     return artifact_slot_type;
 }
 
-void Artifact::set_unit(Unit *p_unit)
+void Artifact::set_unit(Ref<Unit> p_unit)
 {
     unit = p_unit;
 }
 
-Unit* Artifact::get_unit()
+Ref<Unit> Artifact::get_unit()
 {
     return unit;
 }

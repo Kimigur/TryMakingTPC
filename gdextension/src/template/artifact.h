@@ -27,8 +27,8 @@ public:
     void set_artifact_slot_type(String p_artifact_slot_type);
     String get_artifact_slot_type();
 
-    void set_unit(Unit* p_unit);
-    Unit *get_unit();
+    void set_unit(Ref<Unit> p_unit);
+    Ref<Unit> get_unit();
 
 protected:
     static void _bind_methods();
@@ -41,7 +41,7 @@ private:
     String artifact_type = "";
     String artifact_slot_type = "";
 
-    Unit* unit;
+    Ref<Unit> unit;
 };
 
 }

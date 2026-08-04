@@ -13,14 +13,14 @@ void Action::set_impacts(const Dictionary &p_impacts) {
     impacts = p_impacts;
 }
 
-void Action::set_artifact(Artifact *p_artifact)
+void Action::set_artifact(Ref<Artifact> p_artifact)
 {
     artifact = p_artifact;
 }
 
-Artifact *Action::get_artifact()
+Ref<Artifact> Action::get_artifact()
 {
-    return artifact;
+    return *artifact;
 }
 
 Array Action::get_valid_targets(Unit *source, Board *board)

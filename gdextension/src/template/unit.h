@@ -1,3 +1,4 @@
+#pragma once
 #ifndef UNIT_H
 #define UNIT_H
 
@@ -22,14 +23,15 @@ enum EquipSlot {
     SLOT_COUNT
 };
 
-class Board;
 class Core;
+class Board;
 
 class Unit : public Resource
 {
     GDCLASS(Unit, Resource);
 public:
     Unit();
+    ~Unit();
 
     void ready();
     void execute_turn();
@@ -115,7 +117,7 @@ public:
     void reset_speed();
     void reset_bonus();
 
-    void set_board(Ref<Board> *p_board);
+    void set_board(Ref<Board> &p_board);
     Ref<Board> get_board();
 
     void set_core(Core *p_core);
@@ -128,8 +130,8 @@ protected:
     GDVIRTUAL0(execute);
 
 private:
-    Core *core;
-    Ref<Board>* board;
+    Core *core = nullptr;;
+    Ref<Board> board;
     Ref<ArrayMesh> model;
 
     Vector2i position = Vector2i(-1, -1);

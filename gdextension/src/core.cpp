@@ -71,7 +71,7 @@ void Core::start_combat()
                 TurnEntry entry;
                 entry.unit = unit;
                 unit->set_core(this);
-                unit->set_board(&board);
+                unit->set_board(board);
                 unit->ready();
 
                 if (unit->get_type() == 2) {
@@ -108,7 +108,7 @@ void Core::add_to_queue(Ref<Unit> unit)
         TurnEntry entry;
         entry.unit = unit;
         unit->set_core(this);
-        unit->set_board(&board);
+        unit->set_board(board);
         unit->ready();
         turn_queue.push_back(entry);
     }

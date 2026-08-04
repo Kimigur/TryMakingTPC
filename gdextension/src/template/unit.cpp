@@ -6,6 +6,11 @@ using namespace godot;
 
 Unit::Unit() {}
 
+Unit::~Unit()
+{
+
+}
+
 void Unit::ready()
 {
     reset_bonus();
@@ -489,7 +494,7 @@ void Unit::reset_bonus()
     bonus_charisma = 0;      // Харизма
 }
 
-void Unit::set_board(Ref<Board> *p_board)
+void Unit::set_board(Ref<Board> &p_board)
 {
     board = p_board;
 }

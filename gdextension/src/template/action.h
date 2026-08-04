@@ -19,8 +19,8 @@ public:
     void set_impacts(const Dictionary &p_impacts);
     Dictionary get_impacts() const;
 
-    void set_artifact(Artifact* p_artifact);
-    Artifact *get_artifact();
+    void set_artifact(Ref<Artifact> p_artifact);
+    Ref<Artifact> get_artifact();
 
     Array get_valid_targets(Unit *source, Board *board);
     bool execute(Unit *source, Board *board, const Variant &target);
@@ -31,7 +31,7 @@ protected:
     GDVIRTUAL3R(bool, execute, Unit*, Board*, Variant)
 
 private:
-    Artifact* artifact = nullptr;
+    Ref<Artifact> artifact;
     Dictionary impacts;
 };
 

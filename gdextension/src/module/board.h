@@ -1,3 +1,4 @@
+#pragma once
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -13,6 +14,7 @@ class Board : public RefCounted
     GDCLASS(Board, RefCounted)
 public:
     Board();
+    ~Board();
 
     Ref<Cell> get_cell(int x, int y) const;
     Ref<Cell> get_cell(Vector2i pos) const;
