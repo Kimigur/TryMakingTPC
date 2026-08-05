@@ -1,0 +1,32 @@
+# Blender 5.2.0 LTS MTL File: 'book.blend'
+# www.blender.org
+
+newmtl leather
+Ns 428.429718
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd -o -1.2999997 0.39999998 0 C:/Users/irina/Downloads/leather-2.jpg
+
+newmtl paper
+Ns 707.128174
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd -s 0.6999999 1 1 C:/Users/irina/Desktop/texture_paper.png
+
+newmtl title_paper
+Ns 460.459229
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd -s 3.4999988 1 1 C:/Users/irina/Downloads/smooth-stucco-wall.jpg
