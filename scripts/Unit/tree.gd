@@ -7,6 +7,8 @@ func _init():
 	
 	set_max_speed(3)
 	set_current_speed(3)
+	set_max_hp(10)
+	set_hp(10)
 	
 	lock_stats() # Блакируем статы 
 

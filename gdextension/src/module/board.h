@@ -1,4 +1,5 @@
 #pragma once
+#include "constants.h"
 #ifndef BOARD_H
 #define BOARD_H
 
@@ -38,9 +39,6 @@ protected:
     static void _bind_methods();
 
 private:
-    static const int WIDTH = 20;  // Ширина x
-    static const int HEIGHT = 20; // Высота y
-
     Ref<Cell> cells[WIDTH][HEIGHT];
     Ref<Unit> units[WIDTH][HEIGHT];
 };

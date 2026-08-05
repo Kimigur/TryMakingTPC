@@ -35,6 +35,8 @@ public:
     void next_turn();
     Ref<Unit> get_current_unit() const;
 
+    void attack(Unit *attacker, Unit *defender, int attack_bonus, const Callable &on_hit);
+
     int roll_dice(int dice_count, int dice_sides, int modifier = 0);
 
 protected:

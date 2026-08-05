@@ -3,6 +3,8 @@ class_name RustySwordAttack
 
 func _init():
 	impacts = {"damage": 5}
+	cost_type = COST_MAIN
+	set_icon(preload("res://assets/2D/artifact/rusty_sword.png"))
 
 func get_valid_targets(source: Unit, board: Board) -> Array:
 	var targets = []
@@ -21,7 +23,7 @@ func get_valid_targets(source: Unit, board: Board) -> Array:
 					targets.append(Vector2i(nx, ny))
 	return targets
 
-func execute(source: Unit, board: Board, target: Variant) -> bool:
+func _execute(source: Unit, board: Board, target: Variant) -> bool:
 	var sword = get_artifact() as RustySword
 	if sword == null:
 		return false
@@ -31,10 +33,7 @@ func execute(source: Unit, board: Board, target: Variant) -> bool:
 	# Наносим урон
 	var t = target as Vector2i
 	var unit = board.get_unit(t.x, t.y)
-	if unit != null:
-		# Когда будет take_damage:
-		# unit.take_damage(impacts["damage"])
-		print("бьём ", unit.get_unit_name(), " на ", impacts["damage"])
+	attack(source, unit, 15, _on_hit)
 	
 	# Тратим прочность
 	sword.durability -= 1
@@ -45,3 +44,10 @@ func execute(source: Unit, board: Board, target: Variant) -> bool:
 		source.set_main_hand_slot(null)  # снимаем, Ref<> обнулится, меч удалится
 	
 	return true
+
+func _on_hit(attacker :Unit, defender:Unit, is_crit:bool):
+	var damage = attacker.roll_dice(1,10,attacker.get_strength_mod())
+	if is_crit:
+		damage *= 2
+	defender.take_damage(damage, SLASHING)
+		

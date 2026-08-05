@@ -5,13 +5,19 @@ func _init():
 	set_model(preload("res://assets/3D models/OBJ/Фигуры/enemy.obj")) # Загрузка модели
 	set_type(1) # Тип юнита
 	
+	set_max_hp(20)
+	set_hp(20)
+	
+	set_strength(10)
 	set_dexterity(14)
 	set_max_speed(5)
+	
+	set_ac(10)
 	
 	lock_stats() # Блакируем статы 
 
 func ready():
-	pass
+	set_ac(10)
 
 func execute():
 	if main_hand_slot != null:

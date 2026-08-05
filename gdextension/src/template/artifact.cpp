@@ -10,6 +10,11 @@ void Artifact::ready()
     GDVIRTUAL_CALL(ready);
 }
 
+void Artifact::add_bonus()
+{
+    GDVIRTUAL_CALL(add_bonus);
+}
+
 Array Artifact::get_actions()
 {
     Array ret;
@@ -47,6 +52,16 @@ String Artifact::get_artifact_slot_type()
     return artifact_slot_type;
 }
 
+void Artifact::set_icon(const Ref<Texture2D> &p_icon)
+{
+    icon = p_icon;
+}
+
+Ref<Texture2D> Artifact::get_icon() const
+{
+    return icon;
+}
+
 void Artifact::set_unit(Ref<Unit> p_unit)
 {
     unit = p_unit;
@@ -60,6 +75,7 @@ Ref<Unit> Artifact::get_unit()
 void Artifact::_bind_methods()
 {
     GDVIRTUAL_BIND(ready);
+    GDVIRTUAL_BIND(add_bonus);
     GDVIRTUAL_BIND(get_actions);
 
     ClassDB::bind_method(D_METHOD("set_artifact_name", "name"), &Artifact::set_artifact_name);
@@ -73,6 +89,10 @@ void Artifact::_bind_methods()
     ClassDB::bind_method(D_METHOD("set_artifact_slot_type", "category"), &Artifact::set_artifact_slot_type);
     ClassDB::bind_method(D_METHOD("get_artifact_slot_type"), &Artifact::get_artifact_slot_type);
     ADD_PROPERTY(PropertyInfo(Variant::STRING, "artifact_slot_type"), "set_artifact_slot_type", "get_artifact_slot_type");
+
+    ClassDB::bind_method(D_METHOD("set_icon", "icon"), &Artifact::set_icon);
+    ClassDB::bind_method(D_METHOD("get_icon"), &Artifact::get_icon);
+    ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "icon", PROPERTY_HINT_RESOURCE_TYPE, "Texture2D"), "set_icon", "get_icon");
 
     ClassDB::bind_method(D_METHOD("set_unit", "unit"), &Artifact::set_unit);
     ClassDB::bind_method(D_METHOD("get_unit"), &Artifact::get_unit);

@@ -149,6 +149,7 @@ void Core::next_turn()
 
         if (current_unit->get_type() == 1){
             current_unit->reset_speed();
+            current_unit->reset_actions();
             event_bus->bus_emit("turn_changed", Array::make(current_unit));
             current_unit->execute_turn();
             continue;
@@ -159,6 +160,7 @@ void Core::next_turn()
 
         found_player = true;
         current_unit->reset_speed();
+        current_unit->reset_actions();
 
         event_bus->bus_emit("turn_changed", Array::make(current_unit));
     }
@@ -170,6 +172,30 @@ Ref<Unit> Core::get_current_unit() const
         return turn_queue[current_turn_index].unit;
     }
     return nullptr;
+}
+
+void Core::attack(Unit *attacker, Unit *defender, int attack_bonus, const Callable &on_hit)
+{
+    if (!attacker || !defender || !defender->is_alive()) return;
+
+    int roll = roll_dice(1, 20, 0);
+    bool is_crit = (roll == 20);
+    bool is_fumble = (roll == 1);
+    int total = roll + attack_bonus;
+
+    if (is_fumble) {
+        event_bus->bus_emit("attack_fumble", Array::make(attacker, defender));
+        return;
+    }
+
+    if (is_crit || total >= defender->get_ac()) {
+        if (on_hit.is_valid()) {
+            on_hit.call(attacker, defender, is_crit);
+        }
+        event_bus->bus_emit("attack_hit", Array::make(attacker, defender, roll, attack_bonus));
+    } else {
+        event_bus->bus_emit("attack_miss", Array::make(attacker, defender, roll, attack_bonus));
+    }
 }
 
 int Core::roll_dice(int dice_count, int dice_sides, int modifier)
@@ -198,4 +224,6 @@ void Core::_bind_methods()
     ClassDB::bind_method(D_METHOD("add_to_queue", "unit"), &Core::add_to_queue);
     ClassDB::bind_method(D_METHOD("next_turn"), &Core::ask_next_turn);
     ClassDB::bind_method(D_METHOD("get_current_unit"), &Core::get_current_unit);
+
+    ClassDB::bind_method(D_METHOD("attack", "attacker", "defender", "attack_bonus", "func_on_hit"), &Core::attack);
 }

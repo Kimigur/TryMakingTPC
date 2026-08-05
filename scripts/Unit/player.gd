@@ -5,6 +5,8 @@ func _init():
 	set_model(preload("res://assets/3D models/OBJ/Фигуры/Фигуры игрока/player.obj")) # Загрузка модели
 	set_type(0) # Тип юнита
 	
+	set_max_hp(20)
+	set_hp(20)
 	set_dexterity(14)
 	set_max_speed(5)
 	
