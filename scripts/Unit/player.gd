@@ -7,13 +7,14 @@ func _init():
 	
 	set_max_hp(20)
 	set_hp(20)
+	set_strength(10)
 	set_dexterity(14)
 	set_max_speed(5)
-	
+		
 	lock_stats() # Блакируем статы 
 
 func ready():
-	pass
+	set_base_ac(10)
 
 func execute():
 	pass

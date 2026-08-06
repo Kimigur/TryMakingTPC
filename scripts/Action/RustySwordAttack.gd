@@ -7,21 +7,9 @@ func _init():
 	set_icon(preload("res://assets/2D/artifact/rusty_sword.png"))
 
 func get_valid_targets(source: Unit, board: Board) -> Array:
-	var targets = []
-	var pos = source.get_position()
+	var helper = Helper.new()
 	
-	# 8 соседних клеток (ближний бой)
-	for dx in [-1, 0, 1]:
-		for dy in [-1, 0, 1]:
-			if dx == 0 and dy == 0:
-				continue
-			var nx = pos.x + dx
-			var ny = pos.y + dy
-			if board.is_valid_coord(nx, ny):
-				var u = board.get_unit(nx, ny)
-				if u != null:  # авантюрист
-					targets.append(Vector2i(nx, ny))
-	return targets
+	return helper.get_all_target(board, source.position, 1, Helper.TARGET_ANY)
 
 func _execute(source: Unit, board: Board, target: Variant) -> bool:
 	var sword = get_artifact() as RustySword

@@ -41,6 +41,14 @@ enum DamageType {
     PSYCHIC,      // Психический урон
 };
 
+enum TargetType {
+    TARGET_EMPTY = -2,      //< Пустые клетки (не блокируют луч/BFS).
+    TARGET_ANY = -1,        //< Любой юнит.
+    TARGET_DM_DUMMY = 0,    //< Кукла ДМ-а.
+    TARGET_ADVENTURER = 1,  //< Авантюрист (игрок/враг).
+    TARGET_ENVIRONMENT = 2  //< Нейтральный (деревья и т.п.).
+};
+
 static const int WIDTH = 20;  // Ширина x
 static const int HEIGHT = 20; // Высота y
 

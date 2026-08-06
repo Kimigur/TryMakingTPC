@@ -98,6 +98,9 @@ public:
     void set_bonus_resistance_psychic(int p);
     int get_bonus_resistance_psychic() const;
 
+    void set_base_ac(int p_ac);
+    int get_base_ac() const;
+
     void set_ac(int p_ac);
     void add_ac(int p_ac);
     int get_ac() const;
@@ -167,38 +170,38 @@ public:
     bool set_accessory_4_slot(Artifact *p_artifact);
     Artifact* get_accessory_4_slot();
 
-    void set_free_ations_max(int p);
-    int get_free_ations_max();
+    void set_free_actions_max(int p);
+    int get_free_actions_max();
 
-    void set_free_ations_current(int p);
-    int get_free_ations_current();
+    void set_free_actions_current(int p);
+    int get_free_actions_current();
 
-    void set_main_ations_max(int p);
-    int get_main_ations_max();
+    void set_main_actions_max(int p);
+    int get_main_actions_max();
 
-    void set_main_ations_current(int p);
-    int get_main_ations_current();
+    void set_main_actions_current(int p);
+    int get_main_actions_current();
 
-    void set_bonus_ations_max(int p);
-    int get_bonus_ations_max();
+    void set_bonus_actions_max(int p);
+    int get_bonus_actions_max();
 
-    void set_bonus_ations_current(int p);
-    int get_bonus_ations_current();
+    void set_bonus_actions_current(int p);
+    int get_bonus_actions_current();
 
-    void set_reaction_ations_max(int p);
-    int get_reaction_ations_max();
+    void set_reaction_actions_max(int p);
+    int get_reaction_actions_max();
 
-    void set_reaction_ations_current(int p);
-    int get_reaction_ations_current();
+    void set_reaction_actions_current(int p);
+    int get_reaction_actions_current();
 
-    void set_legendary_ations_max(int p);
-    int get_legendary_ations_max();
+    void set_legendary_actions_max(int p);
+    int get_legendary_actions_max();
 
-    void set_legendary_ations_current(int p);
-    int get_legendary_ations_current();
+    void set_legendary_actions_current(int p);
+    int get_legendary_actions_current();
 
-    Array get_max_ations();
-    Array get_current_ations();
+    Array get_max_actions();
+    Array get_current_actions();
 
     Array get_inventory();
 
@@ -219,6 +222,8 @@ public:
     int get_total_resistance(int damage_type);
 
     int roll_dice(int dice_count, int dice_sides, int modifier = 0);
+    void subscribe_event_bus(const StringName &event_name, const Callable &callable);
+    void unsubscribe_event_bus(const StringName &event_name, const Callable &callable);
 
 protected:
     static void _bind_methods();
@@ -241,6 +246,7 @@ private:
     int resistance[13] = {1,1,1,1,1,1,1,1,1,1,1,1,1};
     int bonus_resistance[13] = {1,1,1,1,1,1,1,1,1,1,1,1,1};
 
+    int base_ac = 0;
     int ac = 0;
 
     int max_speed = 0;

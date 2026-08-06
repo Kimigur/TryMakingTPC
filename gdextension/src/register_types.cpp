@@ -13,6 +13,7 @@
 #include "core.h"
 #include "module/board.h"
 #include "module/bus.h"
+#include "module/helper.h"
 #include "template/action.h"
 #include "template/artifact.h"
 #include "template/unit.h"
@@ -29,6 +30,7 @@ void initialize_trymakingtpc_module(ModuleInitializationLevel p_level) {
     ClassDB::register_class<Core>();
     ClassDB::register_class<Board>();
     ClassDB::register_class<Bus>();
+    ClassDB::register_class<Helper>();
 
     ClassDB::register_class<Cell>();
     ClassDB::register_class<Unit>();

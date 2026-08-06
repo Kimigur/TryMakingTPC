@@ -31,6 +31,7 @@ func test():
 	var t1 = tree.new()
 	var sword = RustySword.new()
 	var sword2 = RustySword.new()
+	var sword3 = RustySword.new()
 	
 	core_node.get_board().set_unit(3, 4, e)
 	core_node.get_board().set_unit(13, 8, p)
@@ -38,6 +39,7 @@ func test():
 	
 	e.set_main_hand_slot(sword)
 	p.set_main_hand_slot(sword2)
+	p.set_off_hand_slot(sword3)
 	
 	core_node.start_combat()
 
@@ -68,10 +70,10 @@ func _setup_ui():
 	canvas_layer.layer = 10
 	add_child(canvas_layer)
 	
-	# --- Панель предметов ---
+	# --- Панель действий ---
 	var panel = PanelContainer.new()
 	panel.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	panel.offset_top = -90
+	panel.offset_top = -80      # было -60, увеличили запас
 	panel.offset_bottom = 0
 	
 	var panel_style = StyleBoxFlat.new()
@@ -86,25 +88,30 @@ func _setup_ui():
 	canvas_layer.add_child(panel)
 	
 	var margin = MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 15)
-	margin.add_theme_constant_override("margin_right", 15)
-	margin.add_theme_constant_override("margin_top", 10)
-	margin.add_theme_constant_override("margin_bottom", 10)
+	margin.add_theme_constant_override("margin_left", 10)
+	margin.add_theme_constant_override("margin_right", 10)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
 	panel.add_child(margin)
 	
 	item_container = HBoxContainer.new()
 	item_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	item_container.add_theme_constant_override("separation", 12)
+	item_container.add_theme_constant_override("separation", 6)
 	margin.add_child(item_container)
+	
 	
 	# --- Кнопка хода ---
 	next_turn_button = Button.new()
 	next_turn_button.text = "Следующий ход"
-	next_turn_button.size = Vector2(140, 40)
-	next_turn_button.position = Vector2(
-		get_viewport().get_visible_rect().size.x - 160,
-		20
-	)
+	next_turn_button.add_theme_font_size_override("font_size", 8)
+
+	# Якоря — правый верхний угол экрана
+	next_turn_button.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	next_turn_button.offset_left = -80
+	next_turn_button.offset_top = 3
+	next_turn_button.offset_right = -3
+	next_turn_button.offset_bottom = 20
+
 	canvas_layer.add_child(next_turn_button)
 	next_turn_button.pressed.connect(_on_next_turn_pressed)
 
@@ -180,46 +187,65 @@ func _update_item_panel(unit: Unit):
 	if unit == null or unit.get_type() != 0:
 		return
 	
+	var all_actions = []
 	var inventory = unit.get_inventory()
-	var has_items = false
 	
-	for art_ref in inventory:
-		var art = art_ref as Artifact
+	for i in range(inventory.size()):
+		var art = inventory[i] as Artifact
 		if art == null:
 			continue
-		var actions = art.get_actions()
-		if actions.is_empty():
-			continue
 		
-		has_items = true
+		var actions = art.get_actions()
+		print("Slot ", i, ": ", art.get_artifact_name(), " actions: ", actions.size()) # DEBUG
+		
+		for action in actions:
+			if action != null and action is Action:
+				all_actions.append(action)
+	
+	print("Total actions: ", all_actions.size()) # DEBUG
+	
+	if all_actions.is_empty():
+		var label = Label.new()
+		label.text = "Нет действий"
+		label.add_theme_font_size_override("font_size", 11)
+		label.modulate = Color.GRAY
+		item_container.add_child(label)
+		return
+	
+	for action in all_actions:
 		var btn = TextureButton.new()
-		btn.custom_minimum_size = Vector2(64, 64)
+		btn.custom_minimum_size = Vector2(40, 40)  # было 48, уменьшили
 		btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		
-		var icon = art.get_icon()
+		var icon = action.get_icon()
+		if icon == null:
+			var art = action.get_artifact()
+			if art != null:
+				icon = art.get_icon()
+		
 		if icon != null:
 			btn.texture_normal = icon
 		else:
-			# Fallback — цветная кнопка
 			var tex = GradientTexture2D.new()
-			tex.width = 64
-			tex.height = 64
+			tex.width = 40
+			tex.height = 40
 			var grad = Gradient.new()
 			grad.set_color(0, Color.DARK_RED)
 			grad.set_color(1, Color.ORANGE_RED)
 			tex.gradient = grad
 			btn.texture_normal = tex
 		
-		btn.pressed.connect(_on_item_button_pressed.bind(art, unit))
+		btn.pressed.connect(_on_action_button_pressed.bind(action, unit))
 		item_container.add_child(btn)
-	
-	# Если пусто — покажи заглушку
-	if not has_items:
-		var label = Label.new()
-		label.text = "Нет предметов"
-		label.modulate = Color.GRAY
-		item_container.add_child(label)
 
+
+func _on_action_button_pressed(action: Action, unit: Unit):
+	selected_action = action
+	action_targets = selected_action.get_valid_targets(unit, core_node.get_board())
+	reachable_cells.clear()
+	path_cells.clear()
+	selected_cell = Vector2i(-1, -1)
+	draw_debug_board()
 
 func _on_item_button_pressed(artifact: Artifact, unit: Unit):
 	var actions = artifact.get_actions()

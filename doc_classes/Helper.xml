@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="Helper" inherits="RefCounted"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/godotengine/godot/master/doc/class.xsd">
+
+    <brief_description>
+        Утилитарный класс для поиска целей на тактической доске.
+    </brief_description>
+
+    <description>
+        Содержит методы лучевого сканирования, BFS и прямого перебора для сбора координат клеток, подходящих под заданный фильтр. Все методы возвращают Array из Vector2i.
+    </description>
+
+    <tutorials>
+    </tutorials>
+
+    <constants>
+        <constant name="TARGET_EMPTY" value="-2">
+            Пустые клетки. Луч/BFS проходит сквозь них, но клетка добавляется в результат.
+        </constant>
+        <constant name="TARGET_ANY" value="-1">
+            Любой юнит (любой type).
+        </constant>
+        <constant name="TARGET_DM_DUMMY" value="0">
+            Юниты под контролем ДМ-а (type == 0).
+        </constant>
+        <constant name="TARGET_ADVENTURER" value="1">
+            Авантюристы и враги (type == 1).
+        </constant>
+        <constant name="TARGET_ENVIRONMENT" value="2">
+            Нейтральные объекты: деревья, камни и т.п. (type == 2).
+        </constant>
+    </constants>
+
+    <methods>
+        <method name="get_line_target">
+            <return type="Array" />
+            <param index="0" name="board" type="Board" />
+            <param index="1" name="start_pos" type="Vector2i" />
+            <param index="2" name="radius" type="int" />
+            <param index="3" name="target_type" type="int" enum="Helper.TargetType" />
+            <description>
+                Бросает лучи от [param start_pos] ко всем клеткам периметра квадрата [param radius]. Луч останавливается при столкновении с любым юнитом. Если [param target_type] == [constant TARGET_EMPTY], возвращает достижимые пустые клетки. Иначе возвращает первого подходящего юнита на каждом луче.
+            </description>
+        </method>
+
+        <method name="get_bfs_target">
+            <return type="Array" />
+            <param index="0" name="board" type="Board" />
+            <param index="1" name="start_pos" type="Vector2i" />
+            <param index="2" name="radius" type="int" />
+            <param index="3" name="target_type" type="int" enum="Helper.TargetType" />
+            <description>
+                BFS в 8 направлениях от [param start_pos] в пределах [param radius]. Юниты блокируют проход, но возвращаются как цели, если совпадают с [param target_type].
+            </description>
+        </method>
+
+        <method name="get_bfs_target_path">
+            <return type="Array" />
+            <param index="0" name="board" type="Board" />
+            <param index="1" name="start_pos" type="Vector2i" />
+            <param index="2" name="radius" type="int" />
+            <param index="3" name="end_pos" type="Vector2i" />
+            <description>
+                Строит кратчайший путь (BFS, 8 направлений) от [param start_pos] к [param end_pos], ограниченный [param radius]. Возвращает Array[Vector2i] без стартовой клетки. Проходимы только пустые клетки.
+            </description>
+        </method>
+
+        <method name="get_all_target">
+            <return type="Array" />
+            <param index="0" name="board" type="Board" />
+            <param index="1" name="start_pos" type="Vector2i" />
+            <param index="2" name="radius" type="int" />
+            <param index="3" name="target_type" type="int" enum="Helper.TargetType" />
+            <description>
+                Простой перебор квадрата ([param radius] вокруг [param start_pos]). Без проверки линии видимости или препятствий.
+            </description>
+        </method>
+    </methods>
+
+</class>

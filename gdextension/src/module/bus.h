@@ -6,6 +6,8 @@
 
 namespace godot {
 
+class Unit;
+
 class Bus : public RefCounted
 {
     GDCLASS(Bus, RefCounted);
@@ -13,6 +15,7 @@ public:
     Bus();
 
     void subscribe(const StringName &event_name, const Callable &callable);
+    void unit_subscribe(const StringName &event_name, const Callable &callable, Ref<Unit> owner);
     void unsubscribe(const StringName &event_name, const Callable &callable);
 
     void queue_event(const StringName &event_name, const Array &args = Array());
@@ -27,11 +30,15 @@ protected:
     static void _bind_methods();
 
 private:
+    struct Listener {
+        Callable callback;
+        Ref<Unit> owner;
+    };
     struct QueuedEvent {
         StringName event_name;
         Array args;
     };
-    HashMap<StringName, Vector<Callable>> listeners;
+    HashMap<StringName, Vector<Listener>> listeners;
     Vector<QueuedEvent> event_queue;
 
 };

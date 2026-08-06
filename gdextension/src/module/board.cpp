@@ -230,7 +230,7 @@ Array Board::get_cells_arrey() const
         for (int y = 0; y < HEIGHT; ++y) {
             w.push_back(get_cell(x,y));
         }
-        ret.append_array(w);
+        ret.append(w);
     }
     return ret;
 }
@@ -243,7 +243,7 @@ Array Board::get_units_arrey() const
         for (int y = 0; y < HEIGHT; ++y) {
             w.push_back(get_unit(x,y));
         }
-        ret.append_array(w);
+        ret.append(w);
     }
     return ret;
 }

@@ -17,7 +17,7 @@ func _init():
 	lock_stats() # Блакируем статы 
 
 func ready():
-	set_ac(10)
+	set_base_ac(10)
 
 func execute():
 	if main_hand_slot != null:

@@ -24,10 +24,7 @@ public:
     Ref<Board> get_board();
     Ref<Bus> get_event_bus();
 
-    Array get_reachable_cells(Vector2i from);
-    Array get_path(Vector2i from, Vector2i to);
     bool move_unit(Vector2i from, Vector2i to);
-
 
     void start_combat();
     void add_to_queue(Ref<Unit> unit);

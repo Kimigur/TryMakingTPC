@@ -355,6 +355,18 @@ int Unit::get_bonus_resistance_psychic() const
     return bonus_resistance[PSYCHIC];
 }
 
+void Unit::set_base_ac(int p_ac)
+{
+    if(base_ac == 0){
+        base_ac = p_ac;
+    }
+}
+
+int Unit::get_base_ac() const
+{
+    return base_ac;
+}
+
 void Unit::set_ac(int p_ac)
 {
     ac = p_ac;
@@ -362,12 +374,12 @@ void Unit::set_ac(int p_ac)
 
 void Unit::add_ac(int p_ac)
 {
-    ac+=ac;
+    ac+=p_ac;
 }
 
 int Unit::get_ac() const
 {
-    return ac;
+    return base_ac + ac;
 }
 
 int Unit::get_max_speed(){
@@ -772,7 +784,7 @@ Artifact *Unit::get_accessory_4_slot()
     return inventory[SLOT_ACC_4].ptr();
 }
 
-void Unit::set_free_ations_max(int p)
+void Unit::set_free_actions_max(int p)
 {
     if(stats_locked){
         return;
@@ -780,22 +792,22 @@ void Unit::set_free_ations_max(int p)
     max_action[FREE] = p;
 }
 
-int Unit::get_free_ations_max()
+int Unit::get_free_actions_max()
 {
     return max_action[FREE];
 }
 
-void Unit::set_free_ations_current(int p)
+void Unit::set_free_actions_current(int p)
 {
     current_action[FREE] = p;
 }
 
-int Unit::get_free_ations_current()
+int Unit::get_free_actions_current()
 {
     return current_action[FREE];
 }
 
-void Unit::set_main_ations_max(int p)
+void Unit::set_main_actions_max(int p)
 {
     if(stats_locked){
         return;
@@ -803,22 +815,22 @@ void Unit::set_main_ations_max(int p)
     max_action[MAIN] = p;
 }
 
-int Unit::get_main_ations_max()
+int Unit::get_main_actions_max()
 {
     return max_action[MAIN];
 }
 
-void Unit::set_main_ations_current(int p)
+void Unit::set_main_actions_current(int p)
 {
     current_action[MAIN] = p;
 }
 
-int Unit::get_main_ations_current()
+int Unit::get_main_actions_current()
 {
     return current_action[MAIN];
 }
 
-void Unit::set_bonus_ations_max(int p)
+void Unit::set_bonus_actions_max(int p)
 {
     if(stats_locked){
         return;
@@ -826,22 +838,22 @@ void Unit::set_bonus_ations_max(int p)
     max_action[BONUS] = p;
 }
 
-int Unit::get_bonus_ations_max()
+int Unit::get_bonus_actions_max()
 {
     return max_action[BONUS];
 }
 
-void Unit::set_bonus_ations_current(int p)
+void Unit::set_bonus_actions_current(int p)
 {
     current_action[BONUS] = p;
 }
 
-int Unit::get_bonus_ations_current()
+int Unit::get_bonus_actions_current()
 {
     return current_action[BONUS];
 }
 
-void Unit::set_reaction_ations_max(int p)
+void Unit::set_reaction_actions_max(int p)
 {
     if(stats_locked){
         return;
@@ -849,22 +861,22 @@ void Unit::set_reaction_ations_max(int p)
     max_action[REACTION] = p;
 }
 
-int Unit::get_reaction_ations_max()
+int Unit::get_reaction_actions_max()
 {
     return max_action[REACTION];
 }
 
-void Unit::set_reaction_ations_current(int p)
+void Unit::set_reaction_actions_current(int p)
 {
     current_action[REACTION] = p;
 }
 
-int Unit::get_reaction_ations_current()
+int Unit::get_reaction_actions_current()
 {
     return current_action[REACTION];
 }
 
-void Unit::set_legendary_ations_max(int p)
+void Unit::set_legendary_actions_max(int p)
 {
     if(stats_locked){
         return;
@@ -872,22 +884,22 @@ void Unit::set_legendary_ations_max(int p)
     max_action[LEGENDARY] = p;
 }
 
-int Unit::get_legendary_ations_max()
+int Unit::get_legendary_actions_max()
 {
     return max_action[LEGENDARY];
 }
 
-void Unit::set_legendary_ations_current(int p)
+void Unit::set_legendary_actions_current(int p)
 {
     current_action[LEGENDARY] = p;
 }
 
-int Unit::get_legendary_ations_current()
+int Unit::get_legendary_actions_current()
 {
     return current_action[LEGENDARY];
 }
 
-Array Unit::get_max_ations()
+Array Unit::get_max_actions()
 {
     Array ret;
     for (int i = 0; i < 5; ++i) {
@@ -896,7 +908,7 @@ Array Unit::get_max_ations()
     return ret;
 }
 
-Array Unit::get_current_ations()
+Array Unit::get_current_actions()
 {
     Array ret;
     for (int i = 0; i < 5; ++i) {
@@ -946,6 +958,11 @@ void Unit::reset_bonus()
     for (int i = 0; i < 13; ++i) {
         bonus_resistance[i] = resistance[i];
     }
+    for (int i = 0; i < SLOT_COUNT; ++i) {
+        if(inventory[i]!=nullptr){
+            inventory[i]->add_bonus();
+        }
+    }
 }
 
 void Unit::set_board(Ref<Board> &p_board)
@@ -955,7 +972,7 @@ void Unit::set_board(Ref<Board> &p_board)
 
 Ref<Board> Unit::get_board()
 {
-    return *board;
+    return board;
 }
 
 void Unit::set_core(Core *p_core)
@@ -1007,6 +1024,16 @@ int Unit::roll_dice(int dice_count, int dice_sides, int modifier)
     return this->get_core()->roll_dice(dice_count, dice_sides, modifier);
 }
 
+void Unit::subscribe_event_bus(const StringName &event_name, const Callable &callable)
+{
+    this->get_core()->get_event_bus()->unit_subscribe(event_name, callable, this);
+}
+
+void Unit::unsubscribe_event_bus(const StringName &event_name, const Callable &callable)
+{
+    core->get_event_bus()->unsubscribe(event_name, callable);
+}
+
 void Unit::_bind_methods()
 {
     GDVIRTUAL_BIND(ready);
@@ -1027,7 +1054,7 @@ void Unit::_bind_methods()
 
     ClassDB::bind_method(D_METHOD("get_max_hp"), &Unit::get_max_hp);
     ClassDB::bind_method(D_METHOD("set_max_hp", "max_hp"), &Unit::set_max_hp);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "max_hp"), "", "get_max_speed");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "max_speed"), "", "get_max_speed");
 
     ClassDB::bind_method(D_METHOD("get_hp"), &Unit::get_hp);
     ClassDB::bind_method(D_METHOD("set_hp", "hp"), &Unit::set_hp);
@@ -1122,6 +1149,10 @@ void Unit::_bind_methods()
     ClassDB::bind_method(D_METHOD("add_ac", "ac"), &Unit::add_ac);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "ac"), "set_ac", "get_ac");
 
+    ClassDB::bind_method(D_METHOD("get_base_ac"), &Unit::get_base_ac);
+    ClassDB::bind_method(D_METHOD("set_base_ac", "ac"), &Unit::set_base_ac);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "base_ac"), "get_base_ac", "set_base_ac");
+
     ClassDB::bind_method(D_METHOD("get_max_speed"), &Unit::get_max_speed);
     ClassDB::bind_method(D_METHOD("set_max_speed", "max_speed"), &Unit::set_max_speed);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "max_speed"), "", "get_max_speed");
@@ -1130,37 +1161,37 @@ void Unit::_bind_methods()
     ClassDB::bind_method(D_METHOD("set_current_speed", "current_speed"), &Unit::set_current_speed);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "current_speed"), "set_current_speed", "get_current_speed");
 
-    ClassDB::bind_method(D_METHOD("set_strength"), &Unit::set_strength);
+    ClassDB::bind_method(D_METHOD("set_strength", "strength"), &Unit::set_strength);
     ClassDB::bind_method(D_METHOD("add_bonus_strength"), &Unit::add_bonus_strength);
     ClassDB::bind_method(D_METHOD("get_strength"), &Unit::get_strength);
     ClassDB::bind_method(D_METHOD("get_strength_mod"), &Unit::get_strength_mod);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "strength"), "", "get_strength");
 
-    ClassDB::bind_method(D_METHOD("set_dexterity"), &Unit::set_dexterity);
+    ClassDB::bind_method(D_METHOD("set_dexterity", "dexterity"), &Unit::set_dexterity);
     ClassDB::bind_method(D_METHOD("add_bonus_dexterity"), &Unit::add_bonus_dexterity);
     ClassDB::bind_method(D_METHOD("get_dexterity"), &Unit::get_dexterity);
     ClassDB::bind_method(D_METHOD("get_dexterity_mod"), &Unit::get_dexterity_mod);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "dexterity"), "", "get_dexterity");
 
-    ClassDB::bind_method(D_METHOD("set_constitution"), &Unit::set_constitution);
+    ClassDB::bind_method(D_METHOD("set_constitution", "constitution"), &Unit::set_constitution);
     ClassDB::bind_method(D_METHOD("add_bonus_constitution"), &Unit::add_bonus_constitution);
     ClassDB::bind_method(D_METHOD("get_constitution"), &Unit::get_constitution);
     ClassDB::bind_method(D_METHOD("get_constitution_mod"), &Unit::get_constitution_mod);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "constitution"), "", "get_constitution");
 
-    ClassDB::bind_method(D_METHOD("set_wisdom"), &Unit::set_wisdom);
+    ClassDB::bind_method(D_METHOD("set_wisdom", "wisdom"), &Unit::set_wisdom);
     ClassDB::bind_method(D_METHOD("add_bonus_wisdom"), &Unit::add_bonus_wisdom);
     ClassDB::bind_method(D_METHOD("get_wisdom"), &Unit::get_wisdom);
     ClassDB::bind_method(D_METHOD("get_wisdom_mod"), &Unit::get_wisdom_mod);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "wisdom"), "", "get_wisdom");
 
-    ClassDB::bind_method(D_METHOD("set_intelligence"), &Unit::set_intelligence);
+    ClassDB::bind_method(D_METHOD("set_intelligence", "intelligence"), &Unit::set_intelligence);
     ClassDB::bind_method(D_METHOD("add_bonus_intelligence"), &Unit::add_bonus_intelligence);
     ClassDB::bind_method(D_METHOD("get_intelligence"), &Unit::get_intelligence);
     ClassDB::bind_method(D_METHOD("get_intelligence_mod"), &Unit::get_intelligence_mod);
     ADD_PROPERTY(PropertyInfo(Variant::INT, "intelligence"), "", "get_intelligence");
 
-    ClassDB::bind_method(D_METHOD("set_charisma"), &Unit::set_charisma);
+    ClassDB::bind_method(D_METHOD("set_charisma", "charisma"), &Unit::set_charisma);
     ClassDB::bind_method(D_METHOD("add_bonus_charisma"), &Unit::add_bonus_charisma);
     ClassDB::bind_method(D_METHOD("get_charisma"), &Unit::get_charisma);
     ClassDB::bind_method(D_METHOD("get_charisma_mod"), &Unit::get_charisma_mod);
@@ -1209,43 +1240,43 @@ void Unit::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_inventory"), &Unit::get_inventory);
     ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "inventory"), "", "get_inventory");
 
-    ClassDB::bind_method(D_METHOD("set_free_ations_max", "value"), &Unit::set_free_ations_max);
-    ClassDB::bind_method(D_METHOD("get_free_ations_max"), &Unit::get_free_ations_max);
-    ClassDB::bind_method(D_METHOD("set_free_ations_current", "value"), &Unit::set_free_ations_current);
-    ClassDB::bind_method(D_METHOD("get_free_ations_current"), &Unit::get_free_ations_current);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "free_ations_max"), "", "get_free_ations_max");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "free_ations_current"), "set_free_ations_current", "get_free_ations_current");
+    ClassDB::bind_method(D_METHOD("set_free_actions_max", "value"), &Unit::set_free_actions_max);
+    ClassDB::bind_method(D_METHOD("get_free_actions_max"), &Unit::get_free_actions_max);
+    ClassDB::bind_method(D_METHOD("set_free_actions_current", "value"), &Unit::set_free_actions_current);
+    ClassDB::bind_method(D_METHOD("get_free_actions_current"), &Unit::get_free_actions_current);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "free_actions_max"), "", "get_free_actions_max");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "free_actions_current"), "set_free_actions_current", "get_free_actions_current");
 
-    ClassDB::bind_method(D_METHOD("set_main_ations_max", "value"), &Unit::set_main_ations_max);
-    ClassDB::bind_method(D_METHOD("get_main_ations_max"), &Unit::get_main_ations_max);
-    ClassDB::bind_method(D_METHOD("set_main_ations_current", "value"), &Unit::set_main_ations_current);
-    ClassDB::bind_method(D_METHOD("get_main_ations_current"), &Unit::get_main_ations_current);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "main_ations_max"), "", "get_main_ations_max");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "main_ations_current"), "set_main_ations_current", "get_main_ations_current");
+    ClassDB::bind_method(D_METHOD("set_main_actions_max", "value"), &Unit::set_main_actions_max);
+    ClassDB::bind_method(D_METHOD("get_main_actions_max"), &Unit::get_main_actions_max);
+    ClassDB::bind_method(D_METHOD("set_main_actions_current", "value"), &Unit::set_main_actions_current);
+    ClassDB::bind_method(D_METHOD("get_main_actions_current"), &Unit::get_main_actions_current);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "main_actions_max"), "", "get_main_actions_max");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "main_actions_current"), "set_main_actions_current", "get_main_actions_current");
 
-    ClassDB::bind_method(D_METHOD("set_bonus_ations_max", "value"), &Unit::set_bonus_ations_max);
-    ClassDB::bind_method(D_METHOD("get_bonus_ations_max"), &Unit::get_bonus_ations_max);
-    ClassDB::bind_method(D_METHOD("set_bonus_ations_current", "value"), &Unit::set_bonus_ations_current);
-    ClassDB::bind_method(D_METHOD("get_bonus_ations_current"), &Unit::get_bonus_ations_current);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_ations_max"), "", "get_bonus_ations_max");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_ations_current"), "set_bonus_ations_current", "get_bonus_ations_current");
+    ClassDB::bind_method(D_METHOD("set_bonus_actions_max", "value"), &Unit::set_bonus_actions_max);
+    ClassDB::bind_method(D_METHOD("get_bonus_actions_max"), &Unit::get_bonus_actions_max);
+    ClassDB::bind_method(D_METHOD("set_bonus_actions_current", "value"), &Unit::set_bonus_actions_current);
+    ClassDB::bind_method(D_METHOD("get_bonus_actions_current"), &Unit::get_bonus_actions_current);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_actions_max"), "", "get_bonus_actions_max");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_actions_current"), "set_bonus_actions_current", "get_bonus_actions_current");
 
-    ClassDB::bind_method(D_METHOD("set_reaction_ations_max", "value"), &Unit::set_reaction_ations_max);
-    ClassDB::bind_method(D_METHOD("get_reaction_ations_max"), &Unit::get_reaction_ations_max);
-    ClassDB::bind_method(D_METHOD("set_reaction_ations_current", "value"), &Unit::set_reaction_ations_current);
-    ClassDB::bind_method(D_METHOD("get_reaction_ations_current"), &Unit::get_reaction_ations_current);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "reaction_ations_max"), "", "get_reaction_ations_max");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "reaction_ations_current"), "set_reaction_ations_current", "get_reaction_ations_current");
+    ClassDB::bind_method(D_METHOD("set_reaction_actions_max", "value"), &Unit::set_reaction_actions_max);
+    ClassDB::bind_method(D_METHOD("get_reaction_actions_max"), &Unit::get_reaction_actions_max);
+    ClassDB::bind_method(D_METHOD("set_reaction_actions_current", "value"), &Unit::set_reaction_actions_current);
+    ClassDB::bind_method(D_METHOD("get_reaction_actions_current"), &Unit::get_reaction_actions_current);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "reaction_actions_max"), "", "get_reaction_actions_max");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "reaction_actions_current"), "set_reaction_actions_current", "get_reaction_actions_current");
 
-    ClassDB::bind_method(D_METHOD("set_legendary_ations_max", "value"), &Unit::set_legendary_ations_max);
-    ClassDB::bind_method(D_METHOD("get_legendary_ations_max"), &Unit::get_legendary_ations_max);
-    ClassDB::bind_method(D_METHOD("set_legendary_ations_current", "value"), &Unit::set_legendary_ations_current);
-    ClassDB::bind_method(D_METHOD("get_legendary_ations_current"), &Unit::get_legendary_ations_current);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "legendary_ations_max"), "", "get_legendary_ations_max");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "legendary_ations_current"), "set_legendary_ations_current", "get_legendary_ations_current");
+    ClassDB::bind_method(D_METHOD("set_legendary_actions_max", "value"), &Unit::set_legendary_actions_max);
+    ClassDB::bind_method(D_METHOD("get_legendary_actions_max"), &Unit::get_legendary_actions_max);
+    ClassDB::bind_method(D_METHOD("set_legendary_actions_current", "value"), &Unit::set_legendary_actions_current);
+    ClassDB::bind_method(D_METHOD("get_legendary_actions_current"), &Unit::get_legendary_actions_current);
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "legendary_actions_max"), "", "get_legendary_actions_max");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "legendary_actions_current"), "set_legendary_actions_current", "get_legendary_actions_current");
 
-    ClassDB::bind_method(D_METHOD("get_max_ations"), &Unit::get_max_ations);
-    ClassDB::bind_method(D_METHOD("get_current_ations"), &Unit::get_current_ations);
+    ClassDB::bind_method(D_METHOD("get_max_actions"), &Unit::get_max_actions);
+    ClassDB::bind_method(D_METHOD("get_current_actions"), &Unit::get_current_actions);
 
 
     ClassDB::bind_method(D_METHOD("set_type"), &Unit::set_type);
@@ -1265,4 +1296,5 @@ void Unit::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_total_resistance", "damage_type"), &Unit::get_total_resistance);
 
     ClassDB::bind_method(D_METHOD("roll_dice", "count", "sides", "mod"), &Unit::roll_dice);
+    ClassDB::bind_method(D_METHOD("subscribe_event_bus", "event_name", "callable"), &Unit::subscribe_event_bus);
 }

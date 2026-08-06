@@ -23,25 +23,6 @@ Ref<Bus> Core::get_event_bus()
     return event_bus;
 }
 
-Array Core::get_reachable_cells(Vector2i from)
-{
-    if (!board->is_valid_coord(from.x, from.y) || board->get_unit(from.x, from.y) == nullptr) {
-        return Array();
-    }
-    return board->get_reachable_cells(from);
-}
-
-Array Core::get_path(Vector2i from, Vector2i to)
-{
-    if (!board->is_valid_coord(from.x, from.y) || !board->is_valid_coord(to.x, to.y)) {
-        return Array();
-    }
-    if (board->get_unit(from.x, from.y) == nullptr) {
-        return Array();
-    }
-    return board->get_path(from, to);
-}
-
 bool Core::move_unit(Vector2i from, Vector2i to)
 {
     if(board->move_unit(from, to)){
@@ -147,6 +128,10 @@ void Core::next_turn()
             continue;
         }
 
+        if (!current_unit->is_alive()) {
+            continue;
+        }
+
         if (current_unit->get_type() == 1){
             current_unit->reset_speed();
             current_unit->reset_actions();
@@ -161,6 +146,7 @@ void Core::next_turn()
         found_player = true;
         current_unit->reset_speed();
         current_unit->reset_actions();
+        current_unit->reset_bonus();
 
         event_bus->bus_emit("turn_changed", Array::make(current_unit));
     }
@@ -215,8 +201,6 @@ void Core::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_event_bus"), &Core::get_event_bus);
     ADD_PROPERTY(PropertyInfo(Variant::OBJECT, "event_bus"), "", "get_event_bus");
 
-    ClassDB::bind_method(D_METHOD("get_reachable_cells", "from"), &Core::get_reachable_cells);
-    ClassDB::bind_method(D_METHOD("get_path", "from", "to"), &Core::get_path);
     ClassDB::bind_method(D_METHOD("move_unit", "from", "to"), &Core::move_unit);
     ClassDB::bind_method(D_METHOD("roll_dice", "count", "sides", "mod"), &Core::roll_dice);
 

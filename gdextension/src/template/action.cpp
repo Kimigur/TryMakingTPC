@@ -53,7 +53,7 @@ Array Action::get_valid_targets(Unit *source, Board *board)
 
 bool Action::execute(Unit *source, Board *board, const Variant &target)
 {
-    int act = source->get_current_ations()[cost_type];
+    int act = source->get_current_actions()[cost_type];
     if(act <= 0){
         return false;
     }
@@ -72,15 +72,15 @@ bool Action::execute(Unit *source, Board *board, const Variant &target)
     GDVIRTUAL_CALL(_execute, source, board, target, ret);
     if(ret){
         if (cost_type == FREE) {
-            source->set_free_ations_current(act - 1);
+            source->set_free_actions_current(act - 1);
         } else if(cost_type == MAIN) {
-            source->set_main_ations_current(act - 1);
+            source->set_main_actions_current(act - 1);
         } else if(cost_type == BONUS) {
-            source->set_bonus_ations_current(act - 1);
+            source->set_bonus_actions_current(act - 1);
         } else if(cost_type == REACTION) {
-            source->set_reaction_ations_current(act - 1);
+            source->set_reaction_actions_current(act - 1);
         } else if(cost_type == LEGENDARY) {
-            source->set_legendary_ations_current(act - 1);
+            source->set_legendary_actions_current(act - 1);
         }
         source->get_core()->get_event_bus()->bus_emit("action_executed", Array::make(source, this));
     }
