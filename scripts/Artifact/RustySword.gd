@@ -5,7 +5,7 @@ class_name RustySword
 
 func _init():
 	set_artifact_name("Ржавый меч")
-	set_artifact_type("weapon")
+	set_artifact_type("sword")
 	set_artifact_slot_type("hand")
 	set_icon(preload("res://assets/2D/artifact/rusty_sword.png"))
 

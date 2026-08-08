@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-@onready var core_node: Core = $"../Core"
+@onready var core_node: Core = $"../../Core"
 @onready var map_node: Node3D = $"../Map"
 
 @export var cell_size: float = 0.028
@@ -152,7 +152,7 @@ func _on_next_turn_pressed():
 func _on_turn_changed(unit) -> void:
 	if unit != null and unit.get_type() == 0:
 		selected_cell = unit.get_position()
-		reachable_cells = core_node.get_reachable_cells(selected_cell)
+		reachable_cells = core_node.get_board().get_reachable_cells(selected_cell)
 		_update_turn_arrow(unit)
 		_update_item_panel(unit)
 	else:
@@ -276,7 +276,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _update_current_path() -> void:
 	if selected_cell != Vector2i(-1, -1) and hovered_cell in reachable_cells:
-		path_cells = core_node.get_path(selected_cell, hovered_cell)
+		path_cells = core_node.get_board().get_path(selected_cell, hovered_cell)
 	else:
 		path_cells.clear()
 
@@ -319,7 +319,7 @@ func _on_cell_clicked(cell_coord: Vector2i) -> void:
 	var board = core_node.get_board()
 	if board and board.get_unit(cell_coord.x, cell_coord.y) != null:
 		selected_cell = cell_coord
-		reachable_cells = core_node.get_reachable_cells(selected_cell)
+		reachable_cells = core_node.get_board().get_reachable_cells(selected_cell)
 		_update_current_path()
 	else:
 		selected_cell = Vector2i(-1, -1)

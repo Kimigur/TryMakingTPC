@@ -5,6 +5,7 @@ func _init():
 	impacts = {"damage": 5}
 	cost_type = COST_BONUS
 	set_icon(preload("res://assets/2D/artifact/rusty_sword.png"))
+	name = "parry"
 
 func get_valid_targets(source: Unit, board: Board) -> Array:
 	var ret :Array;

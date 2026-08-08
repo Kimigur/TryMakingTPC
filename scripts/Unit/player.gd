@@ -15,6 +15,9 @@ func _init():
 
 func ready():
 	set_base_ac(10)
+	
+func get_actions() -> Array:
+	return [move_action.new()]
 
 func execute():
 	pass

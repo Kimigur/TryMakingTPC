@@ -1,12 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0cbh56ftrwpu"]
+[gd_scene load_steps=15 format=3 uid="uid://d0cbh56ftrwpu"]
 
 [ext_resource type="ArrayMesh" uid="uid://dhh6hmsiuqvwg" path="res://assets/3D models/OBJ/новый стол/true table.obj" id="1_llaio"]
 [ext_resource type="ArrayMesh" uid="uid://r1yjgprmd02r" path="res://assets/3D models/OBJ/стул/chair.obj" id="2_yd8kv"]
 [ext_resource type="ArrayMesh" uid="uid://co3blwkhlhekm" path="res://assets/3D models/OBJ/карта/map.obj" id="3_uaf1y"]
-[ext_resource type="Script" uid="uid://clbk04daxscrr" path="res://scripts/map.gd" id="4_iba00"]
+[ext_resource type="Script" uid="uid://bj2l3wcvvx31k" path="res://scripts/Board/map.gd" id="4_5v64u"]
+[ext_resource type="Script" uid="uid://cfmw7xudo4p6r" path="res://scripts/Board/board.gd" id="4_g38uy"]
 [ext_resource type="ArrayMesh" uid="uid://dpgm1cyq007fk" path="res://assets/3D models/OBJ/Ширма/screen.obj" id="4_uaf1y"]
+[ext_resource type="ArrayMesh" uid="uid://kxqap8tdbfxy" path="res://assets/3D models/OBJ/Action/Action.obj" id="6_8aysu"]
+[ext_resource type="ArrayMesh" uid="uid://btxl5mmdufpr2" path="res://assets/3D models/OBJ/комната/room.obj" id="6_j7lav"]
+[ext_resource type="Script" uid="uid://d1dd2v84r7bu4" path="res://scripts/camera_controller.gd" id="7_g38uy"]
+[ext_resource type="Script" uid="uid://bfsvrh16ykkip" path="res://scripts/Board/actions.gd" id="7_mkoeh"]
+[ext_resource type="Script" uid="uid://d3sdi33alwtih" path="res://scripts/Board/Buttons/next_turn.gd" id="8_valbs"]
+[ext_resource type="Script" uid="uid://osqw0rm2ip41" path="res://scripts/Board/Buttons/action.gd" id="9_mogw1"]
 
-[node name="Node3D" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_valbs"]
+size = Vector3(0.14764404, 0.022705078, 0.1376419)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mogw1"]
+
+[node name="Main" type="Node3D"]
 
 [node name="Core" type="Core" parent="."]
 board = Object(Board,"cells":[[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]],"units":[[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]],"board_size":Vector2(20, 20),"script":null)
@@ -15,44 +27,364 @@ event_bus = Object(Bus,"script":null)
 
 
 [node name="TrueTable" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5801926, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1.5801926, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.9388485)
 mesh = ExtResource("1_llaio")
 
-[node name="Chair" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.82581204, 0, 0.19599324)
+[node name="P3Chair" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(0.5695508, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.52260214, 0, 0.19599319)
 mesh = ExtResource("2_yd8kv")
+skeleton = NodePath("../..")
 
-[node name="Chair2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.826, 0, -0.75457954)
+[node name="P4Chair" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(0.5695508, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0.52272105, 0, -0.75457954)
 mesh = ExtResource("2_yd8kv")
-skeleton = NodePath("../Chair")
+skeleton = NodePath("../P3Chair")
 
-[node name="Chair3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.45969322, 0, -0.56579375, 0, 0.7289997, 0, 0.56579375, 0, -0.45969322, -0.3184514, 2.384185e-07, 1.8420048)
+[node name="DMChair" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(-0.29090962, 0, -0.35805365, 0, 0.7289997, 0, 0.56579375, 0, -0.45969322, -0.20152695, 2.384185e-07, 1.8420048)
 mesh = ExtResource("2_yd8kv")
-skeleton = NodePath("../Chair2")
+skeleton = NodePath("../P4Chair")
 
-[node name="Chair4" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.9, 0, -1.3589622e-07, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.844, 0, 0.196)
+[node name="P1Chair" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(-0.5695508, 0, -8.599978e-08, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.5341121, 0, 0.1960001)
 mesh = ExtResource("2_yd8kv")
-skeleton = NodePath("../Chair")
+skeleton = NodePath("../P3Chair")
 
-[node name="Chair5" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.9, 0, -1.3589622e-07, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.844, 0, -0.755)
+[node name="P2Chair" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(-0.5695508, 0, -8.599978e-08, 0, 0.9, 0, 1.3589622e-07, 0, -0.9, -0.5341121, 0, -0.7550001)
 mesh = ExtResource("2_yd8kv")
 skeleton = NodePath(".")
 
-[node name="Map" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.1932657, 0, 0, 0, 1, 0, 0, 0, 1.1932657, 0.013952747, 1.2272178, -0.25938857)
+[node name="Board" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(0.7551394, 0, 0, 0, 1, 0, 0, 0, 1.1932657, 0.008829776, 1.2272178, -0.25938845)
 mesh = ExtResource("3_uaf1y")
-script = ExtResource("4_iba00")
+skeleton = NodePath("../..")
+script = ExtResource("4_5v64u")
 
-[node name="Screen" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.5, 0, -2.1855695e-07, 0, 2.5, 0, 2.1855695e-07, 0, -2.5, 0, 1.519, 0.884)
+[node name="Board" type="Node3D" parent="TrueTable/Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44633695, -0.010064125, -0.44570732)
+script = ExtResource("4_g38uy")
+
+[node name="Actions" type="MeshInstance3D" parent="TrueTable/Board"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6960447)
+mesh = ExtResource("6_8aysu")
+skeleton = NodePath("../..")
+script = ExtResource("7_mkoeh")
+
+[node name="NextTurn" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39916894, 0.0021294355, 0.11944604)
+script = ExtResource("8_valbs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/NextTurn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.002303958)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/NextTurn"]
+transform = Transform3D(0.14600009, 0, 0, 0, 0.020405948, 0, 0, 0, 0.0993087, -2.5123358e-05, 0.02021885, -0.0031085014)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="UnitAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, -0.42859906, 0.016283631, -0.12360513)
+script = ExtResource("9_mogw1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/UnitAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.006532192)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/UnitAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrueTable/Board/Actions/UnitAction"]
+transform = Transform3D(3, 0, 0, 0, 2.9999995, 0, 0, 0, 3, 0.044923306, 0.13276768, 0.0069065094)
+
+[node name="HelmAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.333, 0, 0, 0, 0.333, 0, 0, 0, 0.333, -0.32243702, 0.016283631, -0.092396855)
+script = ExtResource("9_mogw1")
+slot_type = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/HelmAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/HelmAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/HelmAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="ArmorAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.333, 0, 0, 0, 0.333, 0, 0, 0, 0.333, -0.32243702, 0.016283631, -0.020662189)
+script = ExtResource("9_mogw1")
+slot_type = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/ArmorAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/ArmorAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/ArmorAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="BootsAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.258, 0, 0, 0, 0.258, 0, 0, 0, 0.258, -0.32208315, 0.017835975, 0.038620353)
+script = ExtResource("9_mogw1")
+slot_type = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/BootsAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/BootsAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/BootsAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="GlovesAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.258, 0, 0, 0, 0.258, 0, 0, 0, 0.258, -0.2681245, 0.017835975, -0.026437163)
+script = ExtResource("9_mogw1")
+slot_type = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/GlovesAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/GlovesAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/GlovesAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+flip_h = true
+pixel_size = 0.001
+
+[node name="GlovesAction2" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.258, 0, 0, 0, 0.258, 0, 0, 0, 0.258, -0.37494326, 0.017835975, -0.026437163)
+script = ExtResource("9_mogw1")
+slot_type = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/GlovesAction2"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/GlovesAction2"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/GlovesAction2"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="MainHandAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.258, 0, 0, 0, 0.258, 0, 0, 0, 0.258, -0.37494326, 0.017835975, 0.022966027)
+script = ExtResource("9_mogw1")
+slot_type = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/MainHandAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/MainHandAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/MainHandAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="OffHandAction" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.258, 0, 0, 0, 0.258, 0, 0, 0, 0.258, -0.2683635, 0.017835975, 0.022966027)
+script = ExtResource("9_mogw1")
+slot_type = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/OffHandAction"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/OffHandAction"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/OffHandAction"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="AccAction1" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.276, 0, 0, 0, 0.276, 0, 0, 0, 0.276, -0.1851623, 0.017835975, -0.108198285)
+script = ExtResource("9_mogw1")
+slot_type = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/AccAction1"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/AccAction1"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/AccAction1"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="AccAction2" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.276, 0, 0, 0, 0.276, 0, 0, 0, 0.276, -0.1851623, 0.017835975, -0.049240947)
+script = ExtResource("9_mogw1")
+slot_type = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/AccAction2"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/AccAction2"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/AccAction2"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="AccAction3" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.276, 0, 0, 0, 0.276, 0, 0, 0, 0.276, -0.1851623, 0.017835975, 0.010750771)
+script = ExtResource("9_mogw1")
+slot_type = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/AccAction3"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/AccAction3"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/AccAction3"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="AccAction4" type="Area3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(0.276, 0, 0, 0, 0.276, 0, 0, 0, 0.276, -0.1851623, 0.017835975, 0.072488904)
+script = ExtResource("9_mogw1")
+slot_type = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrueTable/Board/Actions/AccAction4"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.00076293945, 0.019897461, -0.0060153008)
+shape = SubResource("BoxShape3D_valbs")
+
+[node name="NextTurn" type="MeshInstance3D" parent="TrueTable/Board/Actions/AccAction4"]
+transform = Transform3D(0.13866028, 0, 0, 0, 0.02, 0, 0, 0, 0.13678649, -2.527237e-05, 0.02021885, -0.0065102577)
+mesh = SubResource("BoxMesh_mogw1")
+skeleton = NodePath("../../../../..")
+
+[node name="Sprite3D" type="Sprite3D" parent="TrueTable/Board/Actions/AccAction4"]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, 0.9999999, 0, -0.99999994, -4.3711395e-08, 0, 0.03141594, -0.0037693977)
+pixel_size = 0.001
+
+[node name="AnchorActionButtons" type="Node3D" parent="TrueTable/Board/Actions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.09225273, 0.018538833, -0.15019858)
+
+[node name="Screen" type="MeshInstance3D" parent="TrueTable"]
+transform = Transform3D(-1.5820856, 0, -1.3831033e-07, 0, 2.5, 0, 2.1855695e-07, 0, -2.5, 0, 1.519, 0.88400006)
 mesh = ExtResource("4_uaf1y")
+skeleton = NodePath("../..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.34202015, 0.9396926, 0, -0.9396926, 0.34202015, -0.004490018, 1.9665487, 0.15479018)
+transform = Transform3D(1, 0, 0, 0, 0.27169245, 0.96238416, 0, -0.96238416, 0.27169245, 0, 1.9929401, -2.8432925)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8735242, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 2.8735242, -2.9388485)
+
+[node name="Room" type="MeshInstance3D" parent="."]
+mesh = ExtResource("6_j7lav")
+
+[node name="CameraController" type="Node3D" parent="."]
+script = ExtResource("7_g38uy")
+
+[node name="AnchorCentre" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.771, -0.639)
+metadata/north = NodePath("../AnchorMainTabel")
+metadata/south = NodePath("../AnchorZ+")
+metadata/west = NodePath("../AnchorX-")
+metadata/east = NodePath("../AnchorX+")
+
+[node name="AnchorX-" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5286474, 1.771, -0.639)
+metadata/north = NodePath("../AnchorX-Z-")
+metadata/south = NodePath("../AnchorX-Z+")
+metadata/east = NodePath("../AnchorCentre")
+
+[node name="AnchorX+" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.529, 1.771, -0.639)
+metadata/north = NodePath("../AnchorX+Z-")
+metadata/south = NodePath("../AnchorX+Z+")
+metadata/west = NodePath("../AnchorCentre")
+
+[node name="AnchorZ+" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.771, 1.9973156)
+metadata/north = NodePath("../AnchorCentre")
+metadata/west = NodePath("../AnchorX-Z+")
+metadata/east = NodePath("../AnchorX+Z+")
+
+[node name="AnchorX-Z+" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5286474, 1.771, 1.9973156)
+metadata/north = NodePath("../AnchorX-")
+metadata/east = NodePath("../AnchorZ+")
+
+[node name="AnchorX+Z+" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.529, 1.771, 1.9973156)
+metadata/north = NodePath("../AnchorX+")
+metadata/west = NodePath("../AnchorZ+")
+
+[node name="AnchorX-Z-" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5286474, 1.771, -2.5082467)
+metadata/south = NodePath("../AnchorX-")
+
+[node name="AnchorX+Z-" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.529, 1.771, -2.5082467)
+metadata/south = NodePath("../AnchorX+")
+
+[node name="AnchorMainTabel" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.771, -1.2044418)
+metadata/north = NodePath("../AnchorBoock")
+metadata/south = NodePath("../AnchorCentre")
+metadata/rotation = Vector3(0, 0, 0)
+metadata/lock_rotation = 0
+
+[node name="AnchorBoock" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6237994, -1.5029945)
+metadata/north = NodePath("../AnchorAction")
+metadata/south = NodePath("../AnchorMainTabel")
+metadata/lock_rotation = 0
+metadata/rotation = Vector3(0, 0, 0)
+
+[node name="AnchorBoard" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9929401, -2.8432925)
+metadata/south = NodePath("../AnchorAction")
+metadata/rotation = Vector3(-1.2956451, 0, 0)
+metadata/lock_rotation = 0
+
+[node name="AnchorAction" type="Node3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014078282, 1.686, -2.448)
+metadata/south = NodePath("../AnchorBoock")
+metadata/north = NodePath("../AnchorBoard")
+metadata/lock_rotation = 0
+metadata/rotation = Vector3(-1.5707964, 0, 0)

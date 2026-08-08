@@ -44,6 +44,16 @@ Ref<Texture2D> Action::get_icon() const
     return icon;
 }
 
+void Action::set_name(const String &p_name)
+{
+    name = p_name;
+}
+
+String Action::get_name()
+{
+    return name;
+}
+
 Array Action::get_valid_targets(Unit *source, Board *board)
 {
     Array ret;
@@ -71,9 +81,7 @@ bool Action::execute(Unit *source, Board *board, const Variant &target)
     bool ret = false;
     GDVIRTUAL_CALL(_execute, source, board, target, ret);
     if(ret){
-        if (cost_type == FREE) {
-            source->set_free_actions_current(act - 1);
-        } else if(cost_type == MAIN) {
+        if(cost_type == MAIN) {
             source->set_main_actions_current(act - 1);
         } else if(cost_type == BONUS) {
             source->set_bonus_actions_current(act - 1);
@@ -129,6 +137,9 @@ void Action::_bind_methods()
     ClassDB::bind_integer_constant(get_class_static(), "", "NECROTIC",      DamageType::NECROTIC);
     ClassDB::bind_integer_constant(get_class_static(), "", "PSYCHIC",       DamageType::PSYCHIC);
 
+    ClassDB::bind_method(D_METHOD("set_name", "name"), &Action::set_name);
+    ClassDB::bind_method(D_METHOD("get_name"), &Action::get_name);
+    ADD_PROPERTY(PropertyInfo(Variant::STRING, "name"), "set_name", "get_name");
 
     ClassDB::bind_method(D_METHOD("set_cost_type", "cost_type"), &Action::set_cost_type);
     ClassDB::bind_method(D_METHOD("get_cost_type"), &Action::get_cost_type);

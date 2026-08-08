@@ -30,6 +30,9 @@ public:
     void set_icon(const Ref<Texture2D> &p_icon);
     Ref<Texture2D> get_icon() const;
 
+    void set_name(const String &p_name);
+    String get_name();
+
     Array get_valid_targets(Unit *source, Board *board);
     bool execute(Unit *source, Board *board, const Variant &target);
 
@@ -43,6 +46,7 @@ protected:
 private:
     Ref<Artifact> artifact;
     Dictionary impacts;
+    String name = "";
     int cost_type = MAIN;
     Ref<Texture2D> icon;
 };

@@ -276,6 +276,7 @@ void Board::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_units_arrey"), &Board::get_units_arrey);
     ADD_PROPERTY(PropertyInfo(Variant::ARRAY, "units"), "", "get_units_arrey");
 
+    ClassDB::bind_method(D_METHOD("get_path", "from", "to"), &Board::get_path);
     ClassDB::bind_method(D_METHOD("get_reachable_cells", "from"), &Board::get_reachable_cells);
     ClassDB::bind_method(D_METHOD("move_unit", "from", "to"), &Board::move_unit);
 

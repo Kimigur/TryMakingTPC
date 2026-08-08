@@ -1034,10 +1034,18 @@ void Unit::unsubscribe_event_bus(const StringName &event_name, const Callable &c
     core->get_event_bus()->unsubscribe(event_name, callable);
 }
 
+Array Unit::get_actions()
+{
+    Array ret;
+    GDVIRTUAL_CALL(get_actions, ret);
+    return ret;
+}
+
 void Unit::_bind_methods()
 {
     GDVIRTUAL_BIND(ready);
     GDVIRTUAL_BIND(execute);
+    GDVIRTUAL_BIND(get_actions);
 
     String damage_hint = "None,Bludgeoning,Piercing,Slashing,Fire,Cold,Lightning,Acid,Poison,Force,Radiant,Necrotic,Psychic";
 
@@ -1064,85 +1072,85 @@ void Unit::_bind_methods()
     ClassDB::bind_method(D_METHOD("get_resistance_bludgeoning"), &Unit::get_resistance_bludgeoning);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_bludgeoning", "value"), &Unit::set_bonus_resistance_bludgeoning);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_bludgeoning"), &Unit::get_bonus_resistance_bludgeoning);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_bludgeoning", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_bludgeoning");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_bludgeoning", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_bludgeoning", "get_bonus_resistance_bludgeoning");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_bludgeoning"), "", "get_resistance_bludgeoning");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_bludgeoning"), "set_bonus_resistance_bludgeoning", "get_bonus_resistance_bludgeoning");
 
     ClassDB::bind_method(D_METHOD("set_resistance_piercing", "value"), &Unit::set_resistance_piercing);
     ClassDB::bind_method(D_METHOD("get_resistance_piercing"), &Unit::get_resistance_piercing);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_piercing", "value"), &Unit::set_bonus_resistance_piercing);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_piercing"), &Unit::get_bonus_resistance_piercing);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_piercing", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_piercing");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_piercing", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_piercing", "get_bonus_resistance_piercing");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_piercing"), "", "get_resistance_piercing");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_piercing"), "set_bonus_resistance_piercing", "get_bonus_resistance_piercing");
 
     ClassDB::bind_method(D_METHOD("set_resistance_slashing", "value"), &Unit::set_resistance_slashing);
     ClassDB::bind_method(D_METHOD("get_resistance_slashing"), &Unit::get_resistance_slashing);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_slashing", "value"), &Unit::set_bonus_resistance_slashing);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_slashing"), &Unit::get_bonus_resistance_slashing);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_slashing", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_slashing");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_slashing", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_slashing", "get_bonus_resistance_slashing");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_slashing"), "", "get_resistance_slashing");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_slashing"), "set_bonus_resistance_slashing", "get_bonus_resistance_slashing");
 
     ClassDB::bind_method(D_METHOD("set_resistance_fire", "value"), &Unit::set_resistance_fire);
     ClassDB::bind_method(D_METHOD("get_resistance_fire"), &Unit::get_resistance_fire);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_fire", "value"), &Unit::set_bonus_resistance_fire);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_fire"), &Unit::get_bonus_resistance_fire);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_fire", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_fire");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_fire", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_fire", "get_bonus_resistance_fire");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_fire"), "", "get_resistance_fire");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_fire"), "set_bonus_resistance_fire", "get_bonus_resistance_fire");
 
     ClassDB::bind_method(D_METHOD("set_resistance_cold", "value"), &Unit::set_resistance_cold);
     ClassDB::bind_method(D_METHOD("get_resistance_cold"), &Unit::get_resistance_cold);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_cold", "value"), &Unit::set_bonus_resistance_cold);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_cold"), &Unit::get_bonus_resistance_cold);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_cold", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_cold");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_cold", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_cold", "get_bonus_resistance_cold");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_cold"), "", "get_resistance_cold");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_cold"), "set_bonus_resistance_cold", "get_bonus_resistance_cold");
 
     ClassDB::bind_method(D_METHOD("set_resistance_lightning", "value"), &Unit::set_resistance_lightning);
     ClassDB::bind_method(D_METHOD("get_resistance_lightning"), &Unit::get_resistance_lightning);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_lightning", "value"), &Unit::set_bonus_resistance_lightning);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_lightning"), &Unit::get_bonus_resistance_lightning);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_lightning", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_lightning");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_lightning", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_lightning", "get_bonus_resistance_lightning");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_lightning"), "", "get_resistance_lightning");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_lightning"), "set_bonus_resistance_lightning", "get_bonus_resistance_lightning");
 
     ClassDB::bind_method(D_METHOD("set_resistance_acid", "value"), &Unit::set_resistance_acid);
     ClassDB::bind_method(D_METHOD("get_resistance_acid"), &Unit::get_resistance_acid);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_acid", "value"), &Unit::set_bonus_resistance_acid);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_acid"), &Unit::get_bonus_resistance_acid);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_acid", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_acid");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_acid", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_acid", "get_bonus_resistance_acid");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_acid"), "", "get_resistance_acid");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_acid"), "set_bonus_resistance_acid", "get_bonus_resistance_acid");
 
     ClassDB::bind_method(D_METHOD("set_resistance_poison", "value"), &Unit::set_resistance_poison);
     ClassDB::bind_method(D_METHOD("get_resistance_poison"), &Unit::get_resistance_poison);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_poison", "value"), &Unit::set_bonus_resistance_poison);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_poison"), &Unit::get_bonus_resistance_poison);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_poison", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_poison");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_poison", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_poison", "get_bonus_resistance_poison");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_poison"), "", "get_resistance_poison");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_poison"), "set_bonus_resistance_poison", "get_bonus_resistance_poison");
 
     ClassDB::bind_method(D_METHOD("set_resistance_force", "value"), &Unit::set_resistance_force);
     ClassDB::bind_method(D_METHOD("get_resistance_force"), &Unit::get_resistance_force);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_force", "value"), &Unit::set_bonus_resistance_force);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_force"), &Unit::get_bonus_resistance_force);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_force", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_force");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_force", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_force", "get_bonus_resistance_force");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_force"), "", "get_resistance_force");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_force"), "set_bonus_resistance_force", "get_bonus_resistance_force");
 
     ClassDB::bind_method(D_METHOD("set_resistance_radiant", "value"), &Unit::set_resistance_radiant);
     ClassDB::bind_method(D_METHOD("get_resistance_radiant"), &Unit::get_resistance_radiant);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_radiant", "value"), &Unit::set_bonus_resistance_radiant);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_radiant"), &Unit::get_bonus_resistance_radiant);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_radiant", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_radiant");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_radiant", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_radiant", "get_bonus_resistance_radiant");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_radiant"), "", "get_resistance_radiant");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_radiant"), "set_bonus_resistance_radiant", "get_bonus_resistance_radiant");
 
     ClassDB::bind_method(D_METHOD("set_resistance_necrotic", "value"), &Unit::set_resistance_necrotic);
     ClassDB::bind_method(D_METHOD("get_resistance_necrotic"), &Unit::get_resistance_necrotic);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_necrotic", "value"), &Unit::set_bonus_resistance_necrotic);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_necrotic"), &Unit::get_bonus_resistance_necrotic);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_necrotic", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_necrotic");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_necrotic", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_necrotic", "get_bonus_resistance_necrotic");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_necrotic"), "", "get_resistance_necrotic");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_necrotic"), "set_bonus_resistance_necrotic", "get_bonus_resistance_necrotic");
 
     ClassDB::bind_method(D_METHOD("set_resistance_psychic", "value"), &Unit::set_resistance_psychic);
     ClassDB::bind_method(D_METHOD("get_resistance_psychic"), &Unit::get_resistance_psychic);
     ClassDB::bind_method(D_METHOD("set_bonus_resistance_psychic", "value"), &Unit::set_bonus_resistance_psychic);
     ClassDB::bind_method(D_METHOD("get_bonus_resistance_psychic"), &Unit::get_bonus_resistance_psychic);
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_psychic", PROPERTY_HINT_ENUM, damage_hint), "", "get_resistance_psychic");
-    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_psychic", PROPERTY_HINT_ENUM, damage_hint), "set_bonus_resistance_psychic", "get_bonus_resistance_psychic");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "resistance_psychic"), "", "get_resistance_psychic");
+    ADD_PROPERTY(PropertyInfo(Variant::INT, "bonus_resistance_psychic"), "set_bonus_resistance_psychic", "get_bonus_resistance_psychic");
 
     ClassDB::bind_method(D_METHOD("get_ac"), &Unit::get_ac);
     ClassDB::bind_method(D_METHOD("set_ac", "ac"), &Unit::set_ac);

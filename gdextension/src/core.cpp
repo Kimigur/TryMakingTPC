@@ -135,6 +135,7 @@ void Core::next_turn()
         if (current_unit->get_type() == 1){
             current_unit->reset_speed();
             current_unit->reset_actions();
+            current_unit->reset_bonus();
             event_bus->bus_emit("turn_changed", Array::make(current_unit));
             current_unit->execute_turn();
             continue;

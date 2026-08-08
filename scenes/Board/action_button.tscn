@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxvk147b6nnr2"]
+
+[ext_resource type="Texture2D" uid="uid://dm2m3tdtitwgy" path="res://icon.svg" id="2_2cyfw"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2cyfw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wcfx5"]
+size = Vector3(1.3800659, 0.09289551, 0.0987854)
+
+[node name="ActionButton" type="Area3D"]
+transform = Transform3D(0.276, 0, 0, 0, 0.276, 0, 0, 0, 0.276, -0.09475128, 0.017835975, -0.14529312)
+
+[node name="button" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.3730603, 0, 0, 0, 0.07393506, 0, 0, 0, 0.071365446, 0.65900004, 0.008000001, 0)
+mesh = SubResource("BoxMesh_2cyfw")
+skeleton = NodePath("../../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000703, 0, 0, 0, 1.0000001, 0.66, 0.016, 0)
+shape = SubResource("BoxShape3D_wcfx5")
+
+[node name="Icon" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0145147145, 0.04600001, 0)
+pixel_size = 0.0006
+texture = ExtResource("2_2cyfw")
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.2403271, 0.0639414, -0.001991272)
+pixel_size = 0.001
+text = "Test
+"
+font_size = 64
+outline_size = 16
+
+[node name="Cost" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1, 0.064, -0.0009953976)
+pixel_size = 0.001
+text = "Test"
+font_size = 64
+outline_size = 16

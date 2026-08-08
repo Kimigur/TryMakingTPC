@@ -5,6 +5,7 @@ func _init():
 	impacts = {"damage": 5}
 	cost_type = COST_MAIN
 	set_icon(preload("res://assets/2D/artifact/rusty_sword.png"))
+	name = "attack"
 
 func get_valid_targets(source: Unit, board: Board) -> Array:
 	var helper = Helper.new()
@@ -21,7 +22,7 @@ func _execute(source: Unit, board: Board, target: Variant) -> bool:
 	# Наносим урон
 	var t = target as Vector2i
 	var unit = board.get_unit(t.x, t.y)
-	attack(source, unit, 15, _on_hit)
+	attack(source, unit, source.get_strength_mod(), _on_hit)
 	
 	# Тратим прочность
 	sword.durability -= 1

@@ -225,11 +225,14 @@ public:
     void subscribe_event_bus(const StringName &event_name, const Callable &callable);
     void unsubscribe_event_bus(const StringName &event_name, const Callable &callable);
 
+    Array get_actions();
+
 protected:
     static void _bind_methods();
 
     GDVIRTUAL0(ready);
     GDVIRTUAL0(execute);
+    GDVIRTUAL0R(Array, get_actions);
 
 private:
     Core *core = nullptr;;
